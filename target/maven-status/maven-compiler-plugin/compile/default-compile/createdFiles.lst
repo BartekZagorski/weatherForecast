@@ -1,0 +1,6 @@
+pl\zagora17\view\ViewFactory.class
+pl\zagora17\SystemInfo.class
+module-info.class
+pl\zagora17\controller\BaseController.class
+pl\zagora17\controller\MainWindowController.class
+pl\zagora17\Launcher.class
