@@ -3,6 +3,7 @@ package pl.zagora17.controller;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import pl.zagora17.Config;
 
@@ -52,7 +53,7 @@ public class WeatherService {
 
     public JSONObject getWeather() {
         client = new OkHttpClient();
-        setUrl("https://api.openweathermap.org/data/2.5/weather?q="+getCityName()+"&units="+getUnit()                     +"&appid="+getApiKey());
+        setUrl("https://api.openweathermap.org/data/2.5/forecast?q="+getCityName()+"&units="+getUnit()                     +"&appid="+getApiKey());
         Request request = new Request.Builder()
                 .url(getUrl()).build();
         try {
@@ -62,6 +63,11 @@ public class WeatherService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public JSONArray getListArray() {
+        JSONArray listArray = getWeather().getJSONArray("list");
+        return listArray;
     }
 
 }
