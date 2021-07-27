@@ -1,11 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="551.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="551.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="button" layoutX="309.0" layoutY="223.0" mnemonicParsing="false" text="Button" />
+      <GridPane layoutY="27.0" prefHeight="524.0" prefWidth="703.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: yellow;">
+               <children>
+                  <Label layoutX="11.0" layoutY="52.0" prefHeight="17.0" prefWidth="50.0" text="Państwo" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="52.0" />
+                  <Label layoutX="14.0" layoutY="81.0" prefHeight="17.0" prefWidth="43.0" text="Miasto" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="81.0" />
+                  <Label alignment="CENTER" layoutX="28.0" layoutY="12.0" prefHeight="17.0" prefWidth="297.0" text="Określ miejsce zamieszkania" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="homeCountryField" layoutX="67.0" layoutY="48.0" prefHeight="25.0" prefWidth="260.0" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="48.0" />
+                  <TextField fx:id="homeCityField" layoutX="67.0" layoutY="77.0" prefHeight="25.0" prefWidth="260.0" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="77.0" />
+                  <Slider fx:id="homeSlider" layoutX="30.0" layoutY="365.0" prefHeight="14.0" prefWidth="290.0" AnchorPane.bottomAnchor="172.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="365.0" />
+                  <GridPane layoutX="31.0" layoutY="419.0" onMouseClicked="#gridMouseClicked" prefHeight="111.0" prefWidth="284.0" style="-fx-background-color: orange;">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ImageView fitHeight="27.0" fitWidth="31.0" layoutX="13.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../../FirstJavaFXEmailClient/src/com/bartek/view/icons/email.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                           <children>
+                              <ImageView fitHeight="25.0" fitWidth="27.0" layoutX="15.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../../FirstJavaFXEmailClient/src/com/bartek/view/icons/sent2.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
+                     </children>
+                  </GridPane>
+                  <Button layoutX="13.0" layoutY="112.0" mnemonicParsing="false" onAction="#confirmButtonAction" text="Zatwierdź" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: green;" GridPane.columnIndex="1">
+               <children>
+                  <Label layoutX="16.0" layoutY="54.0" prefHeight="17.0" prefWidth="50.0" text="Państwo" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="52.0" />
+                  <Label layoutX="16.0" layoutY="83.0" prefHeight="17.0" prefWidth="43.0" text="Miasto" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="81.0" />
+                  <Label alignment="CENTER" layoutX="30.0" layoutY="14.0" prefHeight="17.0" prefWidth="297.0" text="Określ miejsce wyjazdu" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="awayCountryField" layoutX="69.0" layoutY="50.0" prefHeight="25.0" prefWidth="260.0" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="48.0" />
+                  <TextField fx:id="awayCityField" layoutX="69.0" layoutY="79.0" prefHeight="25.0" prefWidth="266.0" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="77.0" />
+                  <Slider fx:id="awaySlider" layoutX="14.0" layoutY="368.0" prefHeight="14.0" prefWidth="322.0" AnchorPane.bottomAnchor="172.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="365.0" />
+               </children></AnchorPane>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>
