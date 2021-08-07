@@ -27,18 +27,7 @@ public class Launcher extends Application {
 
         ViewFactory viewFactory = new ViewFactory(weatherManager);
         viewFactory.showMainWindow();
-        WeatherService weatherService = new WeatherService("Glinojeck", "metric");
-        FetchWeatherService fetchWeatherService = new FetchWeatherService(weatherService);
-        List<WeatherDay> weatherDayList = new ArrayList<WeatherDay>();
-        fetchWeatherService.fetchWeather(weatherDayList);
-        int i = 1;
-        for (WeatherDay weatherDay: weatherDayList) {
 
-            for (WeatherPoint weatherPoint : weatherDay.getWeatherPoints()) {
-                System.out.println(weatherPoint.getDate());
-            }
-            System.out.println("dzien nr " + i++);
-        }
     }
 
 //        JSONObject weather = weatherService.getWeather();

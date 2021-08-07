@@ -3,6 +3,7 @@ module pl.zagora17 {
     requires javafx.fxml;
     requires okhttp3;
     requires org.json;
+    requires java.desktop;
 
     exports pl.zagora17;
 

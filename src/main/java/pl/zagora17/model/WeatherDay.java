@@ -12,8 +12,19 @@ public class WeatherDay {
     private Date date;
     private String name;
 
+    public Date getDate() {
+        return date;
+    }
+
     public List<WeatherPoint> getWeatherPoints() {
         return weatherPoints;
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getWeatherPointsCount() {
+        return weatherPoints.size();
+    }
 }
