@@ -20,34 +20,16 @@ import java.util.List;
  */
 public class Launcher extends Application {
 
-    private WeatherManager weatherManager = new WeatherManager();
+    private WeatherManager homeWeatherManager = new WeatherManager();
+    private WeatherManager awayWeatherManager = new WeatherManager();
 
     @Override
     public void start(Stage stage) {
 
-        ViewFactory viewFactory = new ViewFactory(weatherManager);
+        ViewFactory viewFactory = new ViewFactory(homeWeatherManager, awayWeatherManager);
         viewFactory.showMainWindow();
 
     }
-
-//        JSONObject weather = weatherService.getWeather();
-//        List<JSONObject> jsonList = new ArrayList<JSONObject>();
-//        for (Object timestamp : weather.getJSONArray("list")) {
-//            jsonList.add((JSONObject) timestamp);
-//        }
-//        System.out.println(LocalDateTime.parse("2021-07-08 21:00:00".replace(" ", "T")));
-//        for (JSONObject object : jsonList) {
-//            Date date = new Date(object.getLong("dt")*1000 - 7200000);
-//            System.out.println(date.equals(new Date(object.getLong("dt")*1000 - 7200000)));
-//            SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy");
-//            System.out.println(sdf.format(date));
-//            System.out.println(new SimpleDateFormat("EEEE").format(date));
-//            System.out.println(object.getLong("dt"));
-//            System.out.println(date);
-//            System.out.println("temp: " + object.getJSONObject("main").get("temp"));
-//            System.out.println("pressure: " + object.getJSONObject("main").get("pressure"));
-//            }
-//        }
 
     public static void main(String[] args) {
         launch(args);

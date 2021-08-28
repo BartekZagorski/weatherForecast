@@ -5,12 +5,15 @@ import pl.zagora17.view.ViewFactory;
 
 public class BaseController {
 
-    protected WeatherManager weatherManager;
+    protected WeatherManager homeWeatherManager;
+    protected WeatherManager awayWeatherManager;
     protected ViewFactory viewFactory;
     private String fxmlName;
 
-    public BaseController(WeatherManager weatherManager, ViewFactory viewFactory, String fxmlName) {
-        this.weatherManager = weatherManager;
+    public BaseController(WeatherManager homeWeatherManager, WeatherManager awayWeatherManager,
+                          ViewFactory viewFactory, String fxmlName) {
+        this.homeWeatherManager = homeWeatherManager;
+        this.awayWeatherManager = awayWeatherManager;
         this.viewFactory = viewFactory;
         this.fxmlName = fxmlName;
     }

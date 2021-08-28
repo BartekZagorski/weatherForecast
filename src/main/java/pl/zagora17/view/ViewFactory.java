@@ -12,14 +12,17 @@ import java.io.IOException;
 
 public class ViewFactory {
 
-    private WeatherManager weatherManager;
+    private WeatherManager homeWeatherManager;
+    private WeatherManager awayWeatherManager;
 
-    public ViewFactory(WeatherManager weatherManager) {
-        this.weatherManager = weatherManager;
+    public ViewFactory(WeatherManager homeWeatherManager, WeatherManager awayWeatherManager) {
+        this.homeWeatherManager = homeWeatherManager;
+        this.awayWeatherManager = awayWeatherManager;
     }
 
     public void showMainWindow() {
-        BaseController mainWindowController = new MainWindowController(weatherManager,this, "MainWindow.fxml");
+        BaseController mainWindowController = new MainWindowController(homeWeatherManager, awayWeatherManager,this,
+                "MainWindow.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/" + mainWindowController.getFxmlName()));
 
         fxmlLoader.setController(mainWindowController);
@@ -35,7 +38,7 @@ public class ViewFactory {
         Stage stage = new Stage();
         stage.setTitle("Prognoza Pogody");
         stage.setScene(scene);
-        stage.setMinWidth(500);
+        stage.setMinWidth(600);
         stage.setMinHeight(500);
         stage.show();
 

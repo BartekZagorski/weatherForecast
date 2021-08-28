@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FetchWeatherService extends Service<FetchWeatherResult> {
 
@@ -44,6 +46,7 @@ public class FetchWeatherService extends Service<FetchWeatherResult> {
                 WeatherPoint weatherPoint = new WeatherPoint();
                 weatherPoint.setWeatherData(object);
                 weatherPoint.setDate(weatherPointDate);
+                weatherPoint.setHour(getSimpleHour(object));
                 weatherDay.getWeatherPoints().add(weatherPoint);
             }
             weatherDay.setDate(weatherDayDate);
@@ -55,6 +58,16 @@ public class FetchWeatherService extends Service<FetchWeatherResult> {
             return FetchWeatherResult.FAILED_BY_UNEXPECTED_ERROR;
         }
 
+    }
+
+    private String getSimpleHour(JSONObject jsonObject) {
+        String fullDate = jsonObject.getString("dt_txt");
+        Pattern pattern = Pattern.compile("[0-9]{2}:[0-9]{2}");
+        Matcher matcher = pattern.matcher(fullDate);
+        if (matcher.find()) {
+            return matcher.group();
+        }
+        return null;
     }
 
     @Override
