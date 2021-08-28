@@ -3,7 +3,6 @@ package pl.zagora17;
 import pl.zagora17.model.WeatherDay;
 import pl.zagora17.model.WeatherPoint;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherManager {
@@ -11,6 +10,8 @@ public class WeatherManager {
     private List<WeatherDay> weatherDayList;
     private WeatherDay selectedWeatherDay;
     private WeatherPoint selectedWeatherPoint;
+    private String cityName;
+    private String countryCode;
 
     public void setSelectedWeatherDay(WeatherDay selectedWeatherDay) {
         this.selectedWeatherDay = selectedWeatherDay;
@@ -34,5 +35,21 @@ public class WeatherManager {
 
     public WeatherPoint getSelectedWeatherPoint() {
         return selectedWeatherPoint;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 }

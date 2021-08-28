@@ -1,6 +1,6 @@
 package pl.zagora17.model;
 
-import org.json.JSONObject;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,5 +26,17 @@ public class WeatherDay {
 
     public int getWeatherPointsCount() {
         return weatherPoints.size();
+    }
+
+    public int getAverageTemperature() {
+        int sumOfTemperatureValue = 0;
+        for ( WeatherPoint weatherPoint : weatherPoints ) {
+            sumOfTemperatureValue += weatherPoint.getTempValue();
+        }
+        return sumOfTemperatureValue / getWeatherPointsCount();
+    }
+
+    public Image getMiddlePointWeatherIcon() {
+        return weatherPoints.get(getWeatherPointsCount()/2).getWeatherIcon();
     }
 }

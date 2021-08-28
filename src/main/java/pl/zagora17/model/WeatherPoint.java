@@ -1,9 +1,8 @@
 package pl.zagora17.model;
 
+import javafx.scene.image.Image;
+import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.text.DateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 public class WeatherPoint {
@@ -26,8 +25,28 @@ public class WeatherPoint {
 
     private JSONObject weatherData;
     private Date date;
+    private String hour;
 
+    public String getHour() {
+        return hour;
+    }
 
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
 
+    public int getTempValue() {
+        double doubleTempValue = weatherData.getJSONObject("main").getDouble(
+                "temp");
+        int intTempValue = (int) Math.round(doubleTempValue);
+        return intTempValue;
+    }
 
+    public Image getWeatherIcon() {
+        JSONArray weather = weatherData.getJSONArray("weather");
+        String iconCode = weather.getJSONObject(0).getString("icon");
+        String icon = "http://openweathermap.org/img/wn/"+ iconCode +"@2x.png";
+        Image image = new Image(icon);
+        return image;
+    }
 }
