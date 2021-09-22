@@ -7,13 +7,14 @@ import javafx.stage.Stage;
 import pl.zagora17.WeatherManager;
 import pl.zagora17.controller.BaseController;
 import pl.zagora17.controller.MainWindowController;
+import pl.zagora17.controller.services.WeatherService;
 
 import java.io.IOException;
 
 public class ViewFactory {
 
-    private WeatherManager homeWeatherManager;
-    private WeatherManager awayWeatherManager;
+    private final WeatherManager homeWeatherManager;
+    private final WeatherManager awayWeatherManager;
 
     public ViewFactory(WeatherManager homeWeatherManager, WeatherManager awayWeatherManager) {
         this.homeWeatherManager = homeWeatherManager;
@@ -21,7 +22,8 @@ public class ViewFactory {
     }
 
     public void showMainWindow() {
-        BaseController mainWindowController = new MainWindowController(homeWeatherManager, awayWeatherManager,this,
+        BaseController mainWindowController = new MainWindowController(homeWeatherManager, awayWeatherManager,
+                new WeatherService(), this,
                 "MainWindow.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/" + mainWindowController.getFxmlName()));
 

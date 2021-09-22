@@ -68,7 +68,7 @@
                      </children>
                   </HBox>
                   <Slider fx:id="homeSlider" layoutX="30.0" layoutY="365.0" minorTickCount="0" prefHeight="14.0" prefWidth="290.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" visible="false" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
-                  <GridPane fx:id="homeTownGridPane" layoutX="31.0" layoutY="419.0" onMouseClicked="#gridMouseClicked" prefHeight="111.0" prefWidth="284.0" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                  <GridPane fx:id="homeTownGridPane" layoutX="31.0" layoutY="419.0" prefHeight="111.0" prefWidth="284.0" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -168,7 +168,7 @@
                      </children>
                   </HBox>
                   <Slider fx:id="awaySlider" layoutX="30.0" layoutY="372.0" minorTickCount="0" prefHeight="14.0" prefWidth="290.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" visible="false" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
-                  <GridPane fx:id="awayTownGridPane" layoutX="31.0" layoutY="418.0" onMouseClicked="#gridMouseClicked" prefHeight="111.0" prefWidth="284.0" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                  <GridPane fx:id="awayTownGridPane" layoutX="31.0" layoutY="418.0" prefHeight="111.0" prefWidth="284.0" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
