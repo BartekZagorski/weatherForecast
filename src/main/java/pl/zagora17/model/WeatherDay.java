@@ -1,18 +1,16 @@
 package pl.zagora17.model;
 
 import javafx.scene.image.Image;
-
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class WeatherDay {
 
-    private List<WeatherPoint> weatherPoints = new ArrayList<WeatherPoint>();
-    private Date date;
-    private String name;
+    private final List<WeatherPoint> weatherPoints = new ArrayList<>();
+    private ZonedDateTime date;
 
-    public Date getDate() {
+    public ZonedDateTime getDate() {
         return date;
     }
 
@@ -20,7 +18,11 @@ public class WeatherDay {
         return weatherPoints;
     }
 
-    public void setDate(Date date) {
+    public WeatherPoint getWeatherPoint(int i) {
+        return weatherPoints.get(i);
+    }
+
+    public void setDate(ZonedDateTime date) {
         this.date = date;
     }
 
@@ -30,13 +32,15 @@ public class WeatherDay {
 
     public int getAverageTemperature() {
         int sumOfTemperatureValue = 0;
-        for ( WeatherPoint weatherPoint : weatherPoints ) {
+        for (WeatherPoint weatherPoint : weatherPoints) {
             sumOfTemperatureValue += weatherPoint.getTempValue();
         }
         return sumOfTemperatureValue / getWeatherPointsCount();
     }
 
     public Image getMiddlePointWeatherIcon() {
-        return weatherPoints.get(getWeatherPointsCount()/2).getWeatherIcon();
+        return weatherPoints.get(getWeatherPointsCount() / 2).getWeatherIcon();
     }
+
+
 }

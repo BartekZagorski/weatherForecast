@@ -4,7 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a17f006c-c80f-4ec4-8a71-f80a7556f7b4" name="Default Changelist" comment="" />
+    <list default="true" id="a17f006c-c80f-4ec4-8a71-f80a7556f7b4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/zagora17/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/SystemInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/WeatherManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/zagora17/WeatherManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/controller/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/zagora17/controller/BaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/controller/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/zagora17/controller/MainWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/controller/services/FetchWeatherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/zagora17/controller/services/FetchWeatherService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/controller/services/WeatherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/zagora17/controller/services/WeatherService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/model/WeatherDay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/zagora17/model/WeatherDay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/model/WeatherPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/zagora17/model/WeatherPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/view/ViewFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/zagora17/view/ViewFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MainWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/MainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/MainWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/zagora17/Launcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/zagora17/Launcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/zagora17/WeatherManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/zagora17/WeatherManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/zagora17/controller/BaseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/zagora17/controller/BaseController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/zagora17/controller/MainWindowController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/zagora17/controller/MainWindowController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/zagora17/controller/MainWindowController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/zagora17/controller/MainWindowController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/zagora17/controller/MainWindowController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/zagora17/controller/MainWindowController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/zagora17/controller/services/FetchWeatherService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/zagora17/controller/services/FetchWeatherService$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/zagora17/controller/services/FetchWeatherService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/zagora17/controller/services/FetchWeatherService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/zagora17/controller/services/WeatherService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/zagora17/controller/services/WeatherService$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/zagora17/controller/services/WeatherService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/zagora17/controller/services/WeatherService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/zagora17/model/WeatherDay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/zagora17/model/WeatherDay.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/zagora17/model/WeatherPoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/zagora17/model/WeatherPoint.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/zagora17/view/ViewFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/zagora17/view/ViewFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/null/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/weatherForecast-1.0-SNAPSHOT.jar" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,11 +74,12 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../MetodaFabrykujacaGlowna" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -136,9 +167,55 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="2">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

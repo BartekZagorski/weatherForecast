@@ -6,8 +6,12 @@ import org.json.JSONObject;
 import pl.zagora17.controller.FetchWeatherResult;
 import pl.zagora17.model.WeatherDay;
 import pl.zagora17.model.WeatherPoint;
-
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,40 +23,19 @@ public class FetchWeatherService extends Service<FetchWeatherResult> {
     private JSONObject weatherJSON;
     private List<WeatherDay> weatherDayList;
 
-    public FetchWeatherService(JSONObject weatherJSON, List<WeatherDay> weatherDayList) {
+    public void setWeatherJSON(JSONObject weatherJSON) {
         this.weatherJSON = weatherJSON;
+    }
+
+    public void setWeatherDayList(List<WeatherDay> weatherDayList) {
         this.weatherDayList = weatherDayList;
     }
 
     public FetchWeatherResult fetchWeather () {
-        List<JSONObject> jsonList = new ArrayList<JSONObject>();
-        if (weatherJSON.getInt("cod") == 200) {
-            for (Object timestamp : weatherJSON.getJSONArray("list")) {
-                jsonList.add((JSONObject) timestamp);
-            }
-            SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
-            Date weatherDayDate = new Date(100000);
-            WeatherDay weatherDay = new WeatherDay();
-            for (JSONObject object : jsonList) {
-                Date weatherPointDate = new Date(object.getLong("dt") * 1000 - 7200000);
-                if (!dateFormat.format(weatherDayDate).equals(dateFormat.format(weatherPointDate)) ) {
-                    if (!weatherDay.getWeatherPoints().isEmpty()) {
-                        weatherDay.setDate(weatherDayDate);
-                        weatherDayList.add(weatherDay);
-                        weatherDay = new WeatherDay();
-                    }
-                    weatherDayDate = weatherPointDate;
-                }
-                WeatherPoint weatherPoint = new WeatherPoint();
-                weatherPoint.setWeatherData(object);
-                weatherPoint.setDate(weatherPointDate);
-                weatherPoint.setHour(getSimpleHour(object));
-                weatherDay.getWeatherPoints().add(weatherPoint);
-            }
-            weatherDay.setDate(weatherDayDate);
-            weatherDayList.add(weatherDay);
+        if (httpStatus(200)) {
+            processResult();
             return FetchWeatherResult.SUCCESS;
-        } else if (weatherJSON.getInt("cod") == 404){
+        } else if (httpStatus(404)){
             return FetchWeatherResult.FAILED_BY_TOWN_NAME;
         } else {
             return FetchWeatherResult.FAILED_BY_UNEXPECTED_ERROR;
@@ -60,21 +43,57 @@ public class FetchWeatherService extends Service<FetchWeatherResult> {
 
     }
 
-    private String getSimpleHour(JSONObject jsonObject) {
-        String fullDate = jsonObject.getString("dt_txt");
-        Pattern pattern = Pattern.compile("[0-9]{2}:[0-9]{2}");
-        Matcher matcher = pattern.matcher(fullDate);
-        if (matcher.find()) {
-            return matcher.group();
+    private void processResult() {
+        List<JSONObject> jsonList = getJSONListFromOpenWeather();
+        ZonedDateTime weatherDayDate = null;
+        WeatherDay weatherDay = new WeatherDay();
+        for (JSONObject object : jsonList) {
+            ZonedDateTime weatherPointDate = ZonedDateTime.ofInstant(Instant.ofEpochSecond(object.getLong("dt")),
+                    ZoneId.systemDefault());
+            if (weatherDayDate == null) {
+                weatherDayDate = weatherPointDate;
+            } else if (!LocalDate.from(weatherDayDate).equals(LocalDate.from(weatherPointDate))) {
+                weatherDay.setDate(weatherDayDate);
+                weatherDayList.add(weatherDay);
+                weatherDay = new WeatherDay();
+                weatherDayDate = weatherPointDate;
+            }
+            addNewWeatherPointToTheList(weatherDay.getWeatherPoints(), object);
         }
-        return null;
+        weatherDay.setDate(weatherDayDate);
+        weatherDayList.add(weatherDay);
+    }
+
+    private void addNewWeatherPointToTheList(List<WeatherPoint> list, JSONObject object) {
+        WeatherPoint weatherPoint = new WeatherPoint();
+        weatherPoint.setWeatherData(object);
+        weatherPoint.setHour(getSimpleHour(object));
+        list.add(weatherPoint);
+    }
+
+    private List<JSONObject> getJSONListFromOpenWeather() {
+        List<JSONObject> jsonList = new ArrayList<>();
+        for (Object timestamp : weatherJSON.getJSONArray("list")) {
+            jsonList.add((JSONObject) timestamp);
+        }
+        return jsonList;
+    }
+
+    private boolean httpStatus(int i) {
+        return weatherJSON.getInt("cod") == i;
+    }
+
+    private String getSimpleHour(JSONObject jsonObject) {
+        int seconds = jsonObject.getInt("dt");
+        ZonedDateTime zdt = ZonedDateTime.ofInstant(Instant.ofEpochSecond(seconds), ZoneId.systemDefault());
+        return zdt.getHour() + ":00";
     }
 
     @Override
     protected Task<FetchWeatherResult> createTask() {
-        return new Task<FetchWeatherResult>() {
+        return new Task<>() {
             @Override
-            protected FetchWeatherResult call() throws Exception {
+            protected FetchWeatherResult call() {
                 return fetchWeather();
             }
         };

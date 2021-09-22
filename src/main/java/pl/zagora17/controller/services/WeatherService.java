@@ -7,31 +7,32 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONObject;
 import pl.zagora17.Config;
-
 import java.io.IOException;
+import java.util.Objects;
 
 public class WeatherService extends Service<JSONObject> {
 
-    private OkHttpClient client;
-    private Response response;
+    private final OkHttpClient client = new OkHttpClient();
     private String cityName;
-    private String unit;
-    private String url;
-    private final String API_KEY = Config.API_KEY;
+    private static final String UNIT = "metric";
+    private final FetchWeatherService fetchWeatherService = new FetchWeatherService();
 
-    public WeatherService(String cityName, String unit) {
+    public FetchWeatherService getFetchWeatherService() {
+        return fetchWeatherService;
+    }
+
+    public void setCityName(String cityName) {
         this.cityName = cityName;
-        this.unit = unit;
     }
 
     public JSONObject getWeather() {
-        client = new OkHttpClient();
-        url = "https://api.openweathermap.org/data/2.5/forecast?q="+cityName+"&units="+unit+"&appid="+API_KEY;
+        String url =
+                "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=" + UNIT + "&appid=" + Config.API_KEY;
         Request request = new Request.Builder()
                 .url(url).build();
         try {
-            response = client.newCall(request).execute();
-            return new JSONObject(response.body().string());
+            Response response = client.newCall(request).execute();
+            return new JSONObject(Objects.requireNonNull(response.body()).string());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,7 +41,7 @@ public class WeatherService extends Service<JSONObject> {
 
     @Override
     protected Task<JSONObject> createTask() {
-        return new Task<JSONObject>() {
+        return new Task<>() {
             @Override
             protected JSONObject call() throws Exception {
                 return getWeather();

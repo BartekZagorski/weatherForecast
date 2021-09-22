@@ -1,5 +1,6 @@
 package pl.zagora17;
 
+import javafx.scene.Node;
 import pl.zagora17.model.WeatherDay;
 import pl.zagora17.model.WeatherPoint;
 
@@ -17,8 +18,15 @@ public class WeatherManager {
         this.selectedWeatherDay = selectedWeatherDay;
     }
 
+    public void setSelectedWeatherDay (int i) {
+        selectedWeatherDay = weatherDayList.get(i);
+    }
     public void setSelectedWeatherPoint(WeatherPoint selectedWeatherPoint) {
         this.selectedWeatherPoint = selectedWeatherPoint;
+    }
+
+    public void setSelectedWeatherPoint (int i) {
+        selectedWeatherPoint = selectedWeatherDay.getWeatherPoint(i);
     }
 
     public List<WeatherDay> getWeatherDayList() {
@@ -51,5 +59,14 @@ public class WeatherManager {
 
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
+    }
+
+    public WeatherPoint getChosenWeatherPoint(int i) {
+        return selectedWeatherDay.getWeatherPoints().get(i);
+    }
+
+    public void selectDay(int i) {
+        setSelectedWeatherDay(i);
+        setSelectedWeatherPoint(0);
     }
 }
