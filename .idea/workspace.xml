@@ -6,15 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a17f006c-c80f-4ec4-8a71-f80a7556f7b4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/zagora17/Launcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/WeatherManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/zagora17/WeatherManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/controller/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/zagora17/controller/BaseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/controller/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/zagora17/controller/WeatherController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/controller/services/FetchWeatherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/zagora17/controller/services/FetchWeatherService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/controller/services/WeatherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/zagora17/controller/services/WeatherService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/zagora17/view/ViewFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/zagora17/view/ViewFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MainWindow.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/fxml/MainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/MainWindow.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/pl/zagora17/Launcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/zagora17/Launcher.class" afterDir="false" />
@@ -36,16 +27,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Enum" />
         <option value="Class" />
-        <option value="FxmlFile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="f953ec6bfed38c1524595f37bf5051e108b97219" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -202,7 +193,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="HEAD" />
+                        <option value="_refactoring_after_code_review" />
                       </list>
                     </value>
                   </entry>
