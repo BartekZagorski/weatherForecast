@@ -25,6 +25,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
+            <fx:include source="singleTownForecast.fxml" GridPane.columnIndex="1" />
             <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #bdcdff;">
                <children>
                   <Label alignment="CENTER" layoutX="28.0" layoutY="12.0" prefHeight="17.0" prefWidth="297.0" text="Określ miejsce zamieszkania" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
@@ -33,42 +34,42 @@
                      </font>
                   </Label>
                   <Label layoutX="14.0" layoutY="81.0" prefHeight="17.0" prefWidth="43.0" text="Miasto:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="52.0" />
-                  <TextField fx:id="homeCityField" layoutX="61.0" layoutY="77.0" onKeyPressed="#townFieldKeyPressedAction" prefHeight="25.0" prefWidth="264.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="48.0" />
-                  <Button fx:id="homeConfirmButton" layoutX="13.0" layoutY="112.0" mnemonicParsing="false" onAction="#confirmButtonAction" text="Zatwierdź" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="80.0" />
-                  <Label fx:id="homeCountryAndTownLabel" layoutX="16.0" layoutY="115.0" prefHeight="20.0" prefWidth="307.0" text="Państwo, Miasto" visible="false" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="115.0">
+                  <TextField fx:id="cityField" layoutX="61.0" layoutY="77.0" onKeyPressed="#townFieldKeyPressedAction" prefHeight="25.0" prefWidth="264.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="48.0" />
+                  <Button fx:id="confirmButton" layoutX="13.0" layoutY="112.0" mnemonicParsing="false" onAction="#confirmButtonAction" text="Zatwierdź" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="80.0" />
+                  <Label fx:id="countryAndTownLabel" layoutX="16.0" layoutY="115.0" prefHeight="20.0" prefWidth="307.0" text="Państwo, Miasto" visible="false" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="115.0">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="homeDayAndHourLabel" layoutX="16.0" layoutY="144.0" prefHeight="17.0" prefWidth="307.0" text="dzień, godzina" visible="false" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="140.0" />
-                  <HBox fx:id="homeTownLeftHBox" alignment="CENTER_LEFT" layoutX="30.0" layoutY="176.0" prefHeight="185.0" prefWidth="147.0" style="-fx-background-color: #9babdd;" visible="false" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="176.0">
+                  <Label fx:id="dayAndHourLabel" layoutX="16.0" layoutY="144.0" prefHeight="17.0" prefWidth="307.0" text="dzień, godzina" visible="false" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="140.0" />
+                  <HBox fx:id="leftHBox" alignment="CENTER_LEFT" layoutX="30.0" layoutY="176.0" prefHeight="185.0" prefWidth="147.0" style="-fx-background-color: #9babdd;" visible="false" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="176.0">
                      <children>
-                        <ImageView fx:id="homeImageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <HBox.margin>
                               <Insets bottom="30.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label fx:id="homeTownTempLabel" alignment="BOTTOM_LEFT" prefHeight="110.0" prefWidth="97.0" text="temp">
+                        <Label fx:id="tempLabel" alignment="BOTTOM_LEFT" prefHeight="110.0" prefWidth="97.0" text="temp">
                            <font>
                               <Font size="48.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <HBox fx:id="homeTownRightHBox" alignment="CENTER_RIGHT" layoutX="173.0" layoutY="169.0" prefHeight="185.0" prefWidth="147.0" style="-fx-background-color: #9babdd;" visible="false" AnchorPane.bottomAnchor="190.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="176.0">
+                  <HBox fx:id="rightHBox" alignment="CENTER_RIGHT" layoutX="173.0" layoutY="169.0" prefHeight="185.0" prefWidth="147.0" style="-fx-background-color: #9babdd;" visible="false" AnchorPane.bottomAnchor="190.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="176.0">
                      <children>
                         <VBox alignment="CENTER" prefHeight="185.0" prefWidth="110.0">
                            <children>
-                              <Label fx:id="homePrecipitationLabel" prefHeight="24.0" prefWidth="110.0" text="Opady" />
-                              <Label fx:id="homeTownPressureLabel" prefHeight="27.0" prefWidth="148.0" text="Ciśnienie" textAlignment="CENTER" />
-                              <Label fx:id="homeTownWindLabel" prefHeight="27.0" prefWidth="110.0" text="Wiatr" textAlignment="CENTER" />
-                              <Label fx:id="homeTownCloudyLabel" layoutX="10.0" layoutY="115.0" prefHeight="27.0" prefWidth="110.0" text="Zachmurzenie" textAlignment="CENTER" />
+                              <Label fx:id="precipitationLabel" prefHeight="24.0" prefWidth="110.0" text="Opady" />
+                              <Label fx:id="pressureLabel" prefHeight="27.0" prefWidth="148.0" text="Ciśnienie" textAlignment="CENTER" />
+                              <Label fx:id="windLabel" prefHeight="27.0" prefWidth="110.0" text="Wiatr" textAlignment="CENTER" />
+                              <Label fx:id="cloudyLabel" layoutX="10.0" layoutY="115.0" prefHeight="27.0" prefWidth="110.0" text="Zachmurzenie" textAlignment="CENTER" />
                            </children>
                         </VBox>
                      </children>
                   </HBox>
-                  <Slider fx:id="homeSlider" layoutX="30.0" layoutY="365.0" minorTickCount="0" prefHeight="14.0" prefWidth="290.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" visible="false" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
-                  <GridPane fx:id="homeTownGridPane" layoutX="31.0" layoutY="419.0" prefHeight="111.0" prefWidth="284.0" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                  <Slider fx:id="slider" layoutX="30.0" layoutY="365.0" minorTickCount="0" prefHeight="14.0" prefWidth="290.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" visible="false" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+                  <GridPane fx:id="gridPane" layoutX="31.0" layoutY="419.0" prefHeight="111.0" prefWidth="284.0" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -122,111 +123,9 @@
                         </AnchorPane>
                      </children>
                   </GridPane>
-                  <Label fx:id="homeInfoLabel" alignment="CENTER" layoutY="211.0" prefHeight="68.0" prefWidth="350.0" text="Wczytuję..." visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <Label fx:id="infoLabel" alignment="CENTER" layoutY="211.0" prefHeight="68.0" prefWidth="350.0" text="Wczytuję..." visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #b1c1f1;" GridPane.columnIndex="1">
-               <children>
-                  <Label layoutX="14.0" layoutY="51.0" prefHeight="17.0" prefWidth="43.0" text="Miasto" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="52.0" />
-                  <Label alignment="CENTER" layoutX="30.0" layoutY="14.0" prefHeight="17.0" prefWidth="297.0" text="Określ miejsce wyjazdu" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="awayCityField" layoutX="62.0" layoutY="47.0" onKeyPressed="#townFieldKeyPressedAction" prefHeight="25.0" prefWidth="266.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="48.0" />
-                  <Button layoutX="15.0" layoutY="81.0" mnemonicParsing="false" onAction="#confirmButtonAction" text="Zatwierdź" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="80.0" />
-                  <Label fx:id="awayCountryAndTownLabel" layoutX="30.0" layoutY="118.0" prefHeight="20.0" prefWidth="307.0" text="Państwo, Miasto" visible="false" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="115.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="awayDayAndHourLabel" layoutX="30.0" layoutY="142.0" prefHeight="17.0" prefWidth="307.0" text="dzień, godzina" visible="false" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="140.0" />
-                  <HBox fx:id="awayTownLeftHBox" alignment="CENTER_LEFT" layoutX="30.0" layoutY="172.0" prefHeight="185.0" prefWidth="147.0" style="-fx-background-color: #9babdd;" visible="false" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="176.0">
-                     <children>
-                        <ImageView fx:id="awayImageView" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <HBox.margin>
-                              <Insets bottom="30.0" />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label fx:id="awayTownTempLabel" alignment="BOTTOM_LEFT" prefHeight="110.0" prefWidth="97.0" text="temp">
-                           <font>
-                              <Font size="48.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox fx:id="awayTownRightHBox" alignment="CENTER_RIGHT" layoutX="175.0" layoutY="176.0" prefHeight="185.0" prefWidth="147.0" style="-fx-background-color: #9babdd;" visible="false" AnchorPane.bottomAnchor="190.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="176.0">
-                     <children>
-                        <VBox alignment="CENTER" prefHeight="185.0" prefWidth="110.0">
-                           <children>
-                              <Label fx:id="awayPrecipitationLabel" prefHeight="24.0" prefWidth="110.0" text="Opady" />
-                              <Label fx:id="awayTownPressureLabel" prefHeight="27.0" prefWidth="148.0" text="Ciśnienie" textAlignment="CENTER" />
-                              <Label fx:id="awayTownWindLabel" prefHeight="27.0" prefWidth="110.0" text="Wiatr" textAlignment="CENTER" />
-                              <Label fx:id="awayTownCloudyLabel" layoutX="10.0" layoutY="115.0" prefHeight="27.0" prefWidth="110.0" text="Zachmurzenie" textAlignment="CENTER" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-                  <Slider fx:id="awaySlider" layoutX="30.0" layoutY="372.0" minorTickCount="0" prefHeight="14.0" prefWidth="290.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" visible="false" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
-                  <GridPane fx:id="awayTownGridPane" layoutX="31.0" layoutY="418.0" prefHeight="111.0" prefWidth="284.0" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <Label alignment="CENTER" layoutX="10.0" layoutY="14.0" text="Label" textAlignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0" />
-                              <ImageView fitHeight="38.0" fitWidth="38.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" translateX="5.0" />
-                              <Label alignment="CENTER" layoutX="10.0" layoutY="89.0" text="Label" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                           <children>
-                              <Label alignment="CENTER" layoutX="15.0" layoutY="39.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0" />
-                              <ImageView fitHeight="38.0" fitWidth="38.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" translateX="5.0" />
-                              <Label alignment="CENTER" layoutX="11.0" layoutY="88.0" text="Label" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
-                           <children>
-                              <Label alignment="CENTER" layoutX="10.0" layoutY="39.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0" />
-                              <ImageView fitHeight="38.0" fitWidth="38.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" translateX="5.0" />
-                              <Label alignment="CENTER" layoutX="10.0" layoutY="89.0" text="Label" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
-                           <children>
-                              <Label alignment="CENTER" layoutX="13.0" layoutY="40.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0" />
-                              <ImageView fitHeight="38.0" fitWidth="38.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" translateX="5.0" />
-                              <Label alignment="CENTER" layoutX="10.0" layoutY="89.0" text="Label" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
-                           <children>
-                              <Label alignment="CENTER" layoutX="12.0" layoutY="41.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0" />
-                              <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="1.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" translateX="5.0" />
-                              <Label alignment="CENTER" layoutX="11.0" layoutY="89.0" text="Label" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
-                           <children>
-                              <Label alignment="CENTER" layoutX="11.0" layoutY="39.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0" />
-                              <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="1.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" translateX="5.0" />
-                              <Label alignment="CENTER" layoutX="11.0" layoutY="89.0" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </GridPane>
-                  <Label fx:id="awayInfoLabel" alignment="CENTER" layoutX="2.0" layoutY="208.0" prefHeight="68.0" prefWidth="350.0" text="Wczytuję..." visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-               </children></AnchorPane>
          </children>
       </GridPane>
    </children>

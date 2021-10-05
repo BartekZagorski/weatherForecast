@@ -34,16 +34,15 @@ public class WeatherService extends Service<JSONObject> {
             Response response = client.newCall(request).execute();
             return new JSONObject(Objects.requireNonNull(response.body()).string());
         } catch (IOException e) {
-            e.printStackTrace();
+            return new JSONObject();
         }
-        return null;
     }
 
     @Override
     protected Task<JSONObject> createTask() {
         return new Task<>() {
             @Override
-            protected JSONObject call() throws Exception {
+            protected JSONObject call() {
                 return getWeather();
             }
         };

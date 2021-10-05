@@ -1,6 +1,5 @@
 package pl.zagora17;
 
-import javafx.scene.Node;
 import pl.zagora17.model.WeatherDay;
 import pl.zagora17.model.WeatherPoint;
 
@@ -13,10 +12,6 @@ public class WeatherManager {
     private WeatherPoint selectedWeatherPoint;
     private String cityName;
     private String countryCode;
-
-    public void setSelectedWeatherDay(WeatherDay selectedWeatherDay) {
-        this.selectedWeatherDay = selectedWeatherDay;
-    }
 
     public void setSelectedWeatherDay (int i) {
         selectedWeatherDay = weatherDayList.get(i);

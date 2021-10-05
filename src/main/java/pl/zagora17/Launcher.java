@@ -9,15 +9,11 @@ import pl.zagora17.view.ViewFactory;
  */
 public class Launcher extends Application {
 
-    private final WeatherManager homeWeatherManager = new WeatherManager();
-    private final WeatherManager awayWeatherManager = new WeatherManager();
-
     @Override
     public void start(Stage stage) {
 
-        ViewFactory viewFactory = new ViewFactory(homeWeatherManager, awayWeatherManager);
+        ViewFactory viewFactory = new ViewFactory();
         viewFactory.showMainWindow();
-
     }
 
     public static void main(String[] args) {
