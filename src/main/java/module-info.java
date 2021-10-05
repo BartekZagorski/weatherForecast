@@ -6,6 +6,7 @@ module pl.zagora17 {
     requires java.desktop;
 
     exports pl.zagora17;
+    exports pl.zagora17.model;
 
     opens pl.zagora17;
     opens pl.zagora17.controller;

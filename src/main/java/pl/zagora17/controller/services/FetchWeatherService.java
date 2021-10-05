@@ -40,7 +40,6 @@ public class FetchWeatherService extends Service<FetchWeatherResult> {
         } else {
             return FetchWeatherResult.FAILED_BY_UNEXPECTED_ERROR;
         }
-
     }
 
     private void processResult() {

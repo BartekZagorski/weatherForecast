@@ -4,38 +4,25 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import pl.zagora17.WeatherManager;
 import pl.zagora17.controller.BaseController;
-import pl.zagora17.controller.MainWindowController;
+import pl.zagora17.controller.MainController;
 import pl.zagora17.controller.services.WeatherService;
 
 import java.io.IOException;
 
 public class ViewFactory {
 
-    private final WeatherManager homeWeatherManager;
-    private final WeatherManager awayWeatherManager;
+    public void showMainWindow() {
 
-    public ViewFactory(WeatherManager homeWeatherManager, WeatherManager awayWeatherManager) {
-        this.homeWeatherManager = homeWeatherManager;
-        this.awayWeatherManager = awayWeatherManager;
+        BaseController mainWindowController = new MainController(new WeatherService(), this,
+                "MainWindowGood.fxml");
+
+        Parent parent = createView(mainWindowController);
+
+        initializeStage(parent);
     }
 
-    public void showMainWindow() {
-        BaseController mainWindowController = new MainWindowController(homeWeatherManager, awayWeatherManager,
-                new WeatherService(), this,
-                "MainWindow.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/" + mainWindowController.getFxmlName()));
-
-        fxmlLoader.setController(mainWindowController);
-        Parent parent;
-        try{
-            parent = fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-
+    private void initializeStage(Parent parent) {
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
         stage.setTitle("Prognoza Pogody");
@@ -43,6 +30,20 @@ public class ViewFactory {
         stage.setMinWidth(600);
         stage.setMinHeight(500);
         stage.show();
+    }
 
+    public Parent createView(BaseController baseController) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/" + baseController.getFxmlName()));
+
+        fxmlLoader.setController(baseController);
+
+        Parent parent;
+        try{
+            parent = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return parent;
     }
 }
