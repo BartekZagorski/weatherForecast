@@ -201,14 +201,13 @@ public class WeatherController extends BaseController implements Initializable {
                             infoLabel.setText("Wystąpił błąd!");
                             break;
                     }
+                    confirmButton.setDisable(false);
                 });
-                fetchWeatherService.setOnFailed(event -> {
-                    infoLabel.setText("Brak połączenia z internetem!");
-                });
-                confirmButton.setDisable(false);
+                fetchWeatherService.setOnFailed(event -> infoLabel.setText("Brak połączenia z internetem!"));
             });
         } else {
             infoLabel.setText("Nic nie wpisano!");
+            confirmButton.setDisable(false);
         }
 
     }
