@@ -10,6 +10,7 @@
         <maven.compiler.target>16</maven.compiler.target>
         <junit.version>5.8.1</junit.version>
         <junit.platform.version>1.8.1</junit.platform.version>
+        <hamcrest.version>2.2</hamcrest.version>
     </properties>
     <dependencies>
 
@@ -58,8 +59,14 @@
             <version>20210307</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>${hamcrest.version}</version>
+        </dependency>
 
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
