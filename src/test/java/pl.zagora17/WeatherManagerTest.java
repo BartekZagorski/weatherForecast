@@ -11,6 +11,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class WeatherManagerTest {
 
@@ -20,25 +21,18 @@ public class WeatherManagerTest {
     @BeforeAll
     static void initializeWeatherManager() {
         weatherManager.setWeatherDayList(new ArrayList<>());
+        weatherManager.getWeatherDayList().add(weatherDay);
     }
 
     @Test
     public void setSelectedWeatherDayMethodShouldSetTheIIndexElementOfWeatherDayList() {
         //given
-        weatherManager.getWeatherDayList().add(weatherDay);
 
         //when
         weatherManager.setSelectedWeatherDay(0);
 
         //then
         assertThat(weatherManager.getSelectedWeatherDay(), is(weatherDay));
-
-    }
-
-    @Test
-    public void setSelectedWeatherPointMethodShouldSetIIndexElementOfWeatherPointList() {
-        //given
-
 
     }
 }
