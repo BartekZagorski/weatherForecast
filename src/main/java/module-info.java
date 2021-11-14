@@ -1,13 +1,13 @@
-module pl.zagora17 {
+module pl.zagora {
     requires javafx.controls;
     requires javafx.fxml;
     requires okhttp3;
     requires org.json;
     requires java.desktop;
 
-    exports pl.zagora17;
-    exports pl.zagora17.model;
+    exports pl.zagora;
+    exports pl.zagora.model;
 
-    opens pl.zagora17;
-    opens pl.zagora17.controller;
+    opens pl.zagora;
+    opens pl.zagora.controller;
 }
