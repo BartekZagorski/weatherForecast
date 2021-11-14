@@ -1,5 +1,5 @@
 target/
-src/main/java/pl/zagora17/Config.java
+src/main/java/pl/zagora/Config.java
 .idea
 *.iws
 *.iml

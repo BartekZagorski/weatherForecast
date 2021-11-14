@@ -18,7 +18,7 @@
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.1</version>
         <configuration>
-          <mainClass>pl.zagora17.Main</mainClass>
+          <mainClass>pl.zagora.Main</mainClass>
         </configuration>
       </plugin>
       <plugin>
@@ -34,7 +34,7 @@
               <transformers>
                 <transformer>
                   <manifestEntries>
-                    <Main-Class>pl.zagora17.Main</Main-Class>
+                    <Main-Class>pl.zagora.Main</Main-Class>
                     <Build-Number>123</Build-Number>
                   </manifestEntries>
                 </transformer>

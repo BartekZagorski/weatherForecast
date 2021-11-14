@@ -1,11 +1,11 @@
+pl\zagora17\controller\WeatherController$2.class
+pl\zagora17\controller\WeatherController.class
 pl\zagora17\controller\services\FetchWeatherService$1.class
-pl\zagora17\SystemInfo.class
+pl\zagora17\controller\MainController.class
 pl\zagora17\controller\services\FetchWeatherService.class
-pl\zagora17\controller\MainWindowController.class
+pl\zagora17\controller\WeatherController$1.class
 pl\zagora17\WeatherManager.class
-pl\zagora17\controller\MainWindowController$2.class
 pl\zagora17\controller\FetchWeatherResult.class
-pl\zagora17\controller\MainWindowController$1.class
 pl\zagora17\Launcher.class
 pl\zagora17\controller\services\WeatherService.class
 module-info.class
