@@ -52,10 +52,8 @@ public class FetchWeatherServiceTest {
         assertThat(fetchWeatherResult, equalTo(FetchWeatherResult.FAILED_BY_UNEXPECTED_ERROR));
     }
 
-// lista dni : 5 lub 6
-
     @Test
-    public void weatherDayListShouldHaveCorrectSizeAfterFetchWeatherCall() {
+    public void weatherDayListShouldHaveSixDaysAfterFetchWeatherCall() {
         //given
         fetchWeatherService.setWeatherJSON(new WeatherJsonStubHTTP200());
         //when
