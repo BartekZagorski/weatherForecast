@@ -1,12 +1,10 @@
-package pl.zagora.controller.services;
+package pl.zagora.controller.services.fetchWeatherServiceTestStubs;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class WeatherJsonStubHTTP200 extends JSONObject {
-
-    private final JSONObject jsonObject;
+public class WeatherJsonStubHTTP200 extends WeatherJsonStub {
 
     public WeatherJsonStubHTTP200() {
         String exampleJsonData = "{\n" +
@@ -1484,16 +1482,10 @@ public class WeatherJsonStubHTTP200 extends JSONObject {
                 "\"sunset\": 1636961695\n" +
                 "}\n" +
                 "}";
-        this.jsonObject = new JSONObject(exampleJsonData);
+        setJSONObject(new JSONObject(exampleJsonData));
     }
 
-    @Override
-    public JSONArray getJSONArray(String key) throws JSONException {
-        return this.jsonObject.getJSONArray(key);
-    }
-
-    @Override
-    public int getInt(String key) throws JSONException {
-        return this.jsonObject.getInt(key);
+    public void setJSONObject(JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
     }
 }
