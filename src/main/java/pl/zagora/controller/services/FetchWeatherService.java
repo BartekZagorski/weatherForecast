@@ -23,6 +23,10 @@ public class FetchWeatherService extends Service<FetchWeatherResult> {
         this.weatherJSON = weatherJSON;
     }
 
+    public List<WeatherDay> getWeatherDayList() {
+        return weatherDayList;
+    }
+
     public void setWeatherDayList(List<WeatherDay> weatherDayList) {
         this.weatherDayList = weatherDayList;
     }

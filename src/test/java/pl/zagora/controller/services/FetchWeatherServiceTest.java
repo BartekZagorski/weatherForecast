@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pl.zagora.controller.FetchWeatherResult;
+import pl.zagora.controller.services.fetchWeatherServiceTestStubs.WeatherJsonStubAnotherHTTP;
 import pl.zagora.controller.services.fetchWeatherServiceTestStubs.WeatherJsonStubHTTP200;
 import pl.zagora.controller.services.fetchWeatherServiceTestStubs.WeatherJsonStubHTTP404;
 
@@ -40,6 +41,29 @@ public class FetchWeatherServiceTest {
         //then
         assertThat(fetchWeatherResult, equalTo(FetchWeatherResult.FAILED_BY_TOWN_NAME));
     }
+
+    @Test
+    public void fetchWeatherWithBadHTTPResponseShouldReturnFAILED_BY_UNEXPECTED_ERROR() {
+        //given
+        fetchWeatherService.setWeatherJSON(new WeatherJsonStubAnotherHTTP());
+        //when
+        FetchWeatherResult fetchWeatherResult = fetchWeatherService.fetchWeather();
+        //then
+        assertThat(fetchWeatherResult, equalTo(FetchWeatherResult.FAILED_BY_UNEXPECTED_ERROR));
+    }
+
+// lista dni : 5 lub 6
+
+    @Test
+    public void weatherDayListShouldHaveCorrectSizeAfterFetchWeatherCall() {
+        //given
+        fetchWeatherService.setWeatherJSON(new WeatherJsonStubHTTP200());
+        //when
+        fetchWeatherService.fetchWeather();
+        //then
+        assertThat(fetchWeatherService.getWeatherDayList().size(), equalTo(6));
+    }
+
 
     @AfterAll
     public static void cleanUpAfterAllTests() {
