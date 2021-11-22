@@ -19,6 +19,10 @@ public class FetchWeatherService extends Service<FetchWeatherResult> {
     private JSONObject weatherJSON;
     private List<WeatherDay> weatherDayList;
 
+    public JSONObject getWeatherJSON() {
+        return weatherJSON;
+    }
+
     public void setWeatherJSON(JSONObject weatherJSON) {
         this.weatherJSON = weatherJSON;
     }

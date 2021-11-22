@@ -1,6 +1,7 @@
 package pl.zagora.controller.services;
 
-import org.junit.jupiter.api.AfterAll;
+import org.json.JSONObject;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pl.zagora.controller.FetchWeatherResult;
@@ -8,6 +9,9 @@ import pl.zagora.controller.services.fetchWeatherServiceTestStubs.WeatherJsonStu
 import pl.zagora.controller.services.fetchWeatherServiceTestStubs.WeatherJsonStubHTTP200;
 import pl.zagora.controller.services.fetchWeatherServiceTestStubs.WeatherJsonStubHTTP404;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -62,9 +66,27 @@ public class FetchWeatherServiceTest {
         assertThat(fetchWeatherService.getWeatherDayList().size(), equalTo(6));
     }
 
+    @Test
+    public void weatherPointFromWeatherDayListShouldHaveSameHourThanRelevantWeatherPointFromWeatherJSON() {
+        //given
+        fetchWeatherService.setWeatherJSON((new WeatherJsonStubHTTP200()));
+        fetchWeatherService.fetchWeather();
 
-    @AfterAll
-    public static void cleanUpAfterAllTests() {
+        //when
+
+        String hourFromList = fetchWeatherService.getWeatherDayList().get(0).getWeatherPoints().get(0).getHour();
+        JSONObject object = (JSONObject) fetchWeatherService.getWeatherJSON().getJSONArray("list").get(0);
+        ZonedDateTime dateFromJSON =
+                ZonedDateTime.ofInstant(Instant.ofEpochSecond(object.getLong("dt")), ZoneId.systemDefault());
+
+        //then
+
+        assertThat(hourFromList, equalTo(dateFromJSON.getHour() + ":00"));
+
+    }
+
+    @AfterEach
+    public void cleanUpAfterEachTest() {
         fetchWeatherService = new FetchWeatherService();
     }
 
