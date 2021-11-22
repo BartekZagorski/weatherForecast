@@ -4,11 +4,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class WeatherJsonStub extends JSONObject {
+public class WeatherJsonStubHTTP200 extends JSONObject {
 
     private final JSONObject jsonObject;
 
-    public WeatherJsonStub() {
+    public WeatherJsonStubHTTP200() {
         String exampleJsonData = "{\n" +
                 "\"cod\": \"200\",\n" +
                 "\"message\": 0,\n" +
