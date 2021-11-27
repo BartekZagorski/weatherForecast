@@ -3,6 +3,7 @@ package pl.zagora.controller.services;
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.zagora.controller.FetchWeatherResult;
 import pl.zagora.controller.services.fetchWeatherServiceTestStubs.WeatherJsonStubAnotherHTTP;
@@ -19,10 +20,10 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class FetchWeatherServiceTest {
 
-    private static FetchWeatherService fetchWeatherService = new FetchWeatherService();
+    private FetchWeatherService fetchWeatherService = new FetchWeatherService();
 
-    @BeforeAll
-    public static void initializeFetchWeatherService() {
+    @BeforeEach
+    public void initializeFetchWeatherService() {
         fetchWeatherService.setWeatherDayList(new ArrayList<>());
     }
 
