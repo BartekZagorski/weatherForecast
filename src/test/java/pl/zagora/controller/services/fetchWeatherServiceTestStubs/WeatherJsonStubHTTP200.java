@@ -1,7 +1,6 @@
 package pl.zagora.controller.services.fetchWeatherServiceTestStubs;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class WeatherJsonStubHTTP200 extends WeatherJsonStub {
@@ -1487,5 +1486,13 @@ public class WeatherJsonStubHTTP200 extends WeatherJsonStub {
 
     public void setJSONObject(JSONObject jsonObject) {
         this.jsonObject = jsonObject;
+    }
+
+    public void manipulateDataToStartFromMidnightUTC() {
+        JSONArray jsonArray = jsonObject.getJSONArray("list");
+        for (Object jsonObject : jsonArray
+             ) {
+            ((JSONObject) jsonObject).put("dt", ((JSONObject) jsonObject).getLong("dt") + 21600);
+        }
     }
 }

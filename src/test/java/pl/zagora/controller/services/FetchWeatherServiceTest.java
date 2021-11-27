@@ -67,6 +67,18 @@ public class FetchWeatherServiceTest {
     }
 
     @Test
+    public void weatherDayListShouldHaveFiveDaysAfterFetchWeatherCallIfTheDataStartsFromMidnightUTC() {
+        //given
+        WeatherJsonStubHTTP200 wjs200 = new WeatherJsonStubHTTP200();
+        wjs200.manipulateDataToStartFromMidnightUTC();
+        fetchWeatherService.setWeatherJSON(wjs200);
+        //when
+        fetchWeatherService.fetchWeather();
+        //then
+        assertThat(fetchWeatherService.getWeatherDayList().size(), equalTo(5));
+    }
+
+    @Test
     public void weatherPointFromWeatherDayListShouldHaveSameHourThanRelevantWeatherPointFromWeatherJSON() {
         //given
         fetchWeatherService.setWeatherJSON((new WeatherJsonStubHTTP200()));
