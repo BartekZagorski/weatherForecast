@@ -1,6 +1,6 @@
-target/
 src/main/java/pl/zagora/Config.java
 .idea
 *.iws
 *.iml
 *.ipr
+target/*
