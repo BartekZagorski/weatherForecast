@@ -28,7 +28,6 @@ import pl.zagora.view.ViewFactory;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class WeatherController extends BaseController implements Initializable {
@@ -40,6 +39,7 @@ public class WeatherController extends BaseController implements Initializable {
     private final IntegerProperty fontSize = new SimpleIntegerProperty();
     private final IntegerProperty anchorWidth = new SimpleIntegerProperty();
     private final IntegerProperty gridControlWidth = new SimpleIntegerProperty();
+    private final FetchWeatherService fetchWeatherService = new FetchWeatherService();
 
     @FXML
     private AnchorPane mainAnchorPane;
@@ -184,28 +184,16 @@ public class WeatherController extends BaseController implements Initializable {
             weatherService.setCityName(cityValue);
             weatherService.restart();
             weatherService.setOnSucceeded(e1 -> {
-                weatherManager.setWeatherDayList(new ArrayList<>());
-                FetchWeatherService fetchWeatherService = weatherService.getFetchWeatherService();
-                JSONObject weatherServiceResult = weatherService.getValue();
-                fetchWeatherService.setWeatherJSON(weatherServiceResult);
-                fetchWeatherService.setWeatherDayList(weatherManager.getWeatherDayList());
-                fetchWeatherService.restart();
-                fetchWeatherService.setOnSucceeded(e2 -> {
-                    FetchWeatherResult fetchWeatherResult = fetchWeatherService.getValue();
-                    switch (fetchWeatherResult) {
-                        case SUCCESS:
-                            processResult(weatherServiceResult);
-                            break;
-                        case FAILED_BY_TOWN_NAME:
-                            infoLabel.setText("Nie znaleziono miasta!");
-                            break;
-                        case FAILED_BY_UNEXPECTED_ERROR:
-                            infoLabel.setText("Wystąpił błąd!");
-                            break;
-                    }
-                    confirmButton.setDisable(false);
-                });
-                fetchWeatherService.setOnFailed(event -> infoLabel.setText("Brak połączenia z internetem!"));
+                DownloadWeatherResult downloadWeatherResult = weatherService.getValue();
+                switch(downloadWeatherResult) {
+                    case SUCCESS:
+                        fetchWeather();
+                        break;
+                    case FAIL:
+                        infoLabel.setText("Brak połączenia z internetem!");
+                        confirmButton.setDisable(false);
+                        break;
+                }
             });
         } else {
             infoLabel.setText("Nic nie wpisano!");
@@ -213,8 +201,31 @@ public class WeatherController extends BaseController implements Initializable {
         }
     }
 
-    private void processResult(JSONObject weatherServiceResult) {
-        JSONObject cityData = weatherServiceResult.getJSONObject("city");
+    private void fetchWeather() {
+        weatherManager.setWeatherDayList(new ArrayList<>());
+        fetchWeatherService.setWeatherJSON(weatherService.getWeatherJSON());
+        fetchWeatherService.setWeatherDayList(weatherManager.getWeatherDayList());
+        fetchWeatherService.restart();
+        fetchWeatherService.setOnSucceeded(e2 -> {
+            FetchWeatherResult fetchWeatherResult = fetchWeatherService.getValue();
+            switch (fetchWeatherResult) {
+                case SUCCESS:
+                    processResult(weatherService.getWeatherJSON());
+                    break;
+                case FAILED_BY_TOWN_NAME:
+                    infoLabel.setText("Nie znaleziono miasta!");
+                    break;
+                case FAILED_BY_UNEXPECTED_ERROR:
+                    infoLabel.setText("Wystąpił błąd!");
+                    break;
+            }
+            confirmButton.setDisable(false);
+        });
+        fetchWeatherService.setOnFailed(event -> infoLabel.setText("Brak połączenia z internetem!"));
+    }
+
+    private void processResult(JSONObject weatherJSON) {
+        JSONObject cityData = weatherJSON.getJSONObject("city");
         weatherManager.setCityName(cityData.getString("name"));
         weatherManager.setCountryCode(cityData.getString("country"));
         int i = 0;
