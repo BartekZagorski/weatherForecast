@@ -7,42 +7,45 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONObject;
 import pl.zagora.Config;
+import pl.zagora.controller.DownloadWeatherResult;
+
 import java.io.IOException;
 import java.util.Objects;
 
-public class WeatherService extends Service<JSONObject> {
+public class WeatherService extends Service<DownloadWeatherResult> {
 
     private final OkHttpClient client = new OkHttpClient();
     private String cityName;
     private static final String UNIT = "metric";
-    private final FetchWeatherService fetchWeatherService = new FetchWeatherService();
+    private JSONObject weatherJSON;
 
-    public FetchWeatherService getFetchWeatherService() {
-        return fetchWeatherService;
+    public JSONObject getWeatherJSON() {
+        return weatherJSON;
     }
 
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }
 
-    public JSONObject getWeather() {
+    public DownloadWeatherResult getWeather() {
         String url =
                 "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=" + UNIT + "&appid=" + Config.API_KEY;
         Request request = new Request.Builder()
                 .url(url).build();
         try {
             Response response = client.newCall(request).execute();
-            return new JSONObject(Objects.requireNonNull(response.body()).string());
+            weatherJSON = new JSONObject(Objects.requireNonNull(response.body()).string());
+            return DownloadWeatherResult.SUCCESS;
         } catch (IOException e) {
-            return new JSONObject();
+            return DownloadWeatherResult.FAIL;
         }
     }
 
     @Override
-    protected Task<JSONObject> createTask() {
+    protected Task<DownloadWeatherResult> createTask() {
         return new Task<>() {
             @Override
-            protected JSONObject call() {
+            protected DownloadWeatherResult call() {
                 return getWeather();
             }
         };

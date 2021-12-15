@@ -4,6 +4,7 @@ import pl.zagora.model.WeatherDay;
 import pl.zagora.model.WeatherPoint;
 
 import java.util.List;
+import java.util.Locale;
 
 public class WeatherManager {
 
@@ -48,8 +49,9 @@ public class WeatherManager {
         return cityName;
     }
 
-    public String getCountryCode() {
-        return countryCode;
+    public String getCountryName() {
+        Locale loc = new Locale("", countryCode);
+        return loc.getDisplayCountry();
     }
 
     public void setCountryCode(String countryCode) {

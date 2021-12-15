@@ -28,19 +28,18 @@ import pl.zagora.view.ViewFactory;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class WeatherController extends BaseController implements Initializable {
 
     public static final DateTimeFormatter LONG_DAY_NAME = DateTimeFormatter.ofPattern("EEEE");
-    public static final DateTimeFormatter SHORT_DAY_NAME = DateTimeFormatter.ofPattern("EEE");
-    private int homeSelectedDayNumber;
+    private int selectedDayNumber;
     private final String title;
     private final WeatherManager weatherManager = new WeatherManager();
     private final IntegerProperty fontSize = new SimpleIntegerProperty();
     private final IntegerProperty anchorWidth = new SimpleIntegerProperty();
     private final IntegerProperty gridControlWidth = new SimpleIntegerProperty();
+    private final FetchWeatherService fetchWeatherService = new FetchWeatherService();
 
     @FXML
     private AnchorPane mainAnchorPane;
@@ -99,7 +98,7 @@ public class WeatherController extends BaseController implements Initializable {
     @FXML
     void confirmButtonAction() {
         confirmButton.setDisable(true);
-        displayWeather(cityField, infoLabel, weatherManager, gridPane);
+        downloadWeather();
     }
 
     @FXML
@@ -127,35 +126,34 @@ public class WeatherController extends BaseController implements Initializable {
     }
 
     private void setCloudyValue() {
-        int cloudyValue = getCurrentWeatherPoint().getWeatherData().getJSONObject("clouds").getInt("all");
+        int cloudyValue = getCurrentWeatherPoint().getCloudyValue();
         cloudyLabel.setText("zachmurzenie: " + cloudyValue + "%");
     }
 
     private void setWindSpeed() {
-        double windSpeed = getCurrentWeatherPoint().getWeatherData().getJSONObject("wind").getDouble("speed");
+        double windSpeed = getCurrentWeatherPoint().getWindSpeed();
         windLabel.setText("wiatr: " + windSpeed + " m/s");
     }
 
     private void setPressureValue() {
-        int pressureValue = getCurrentWeatherPoint().getWeatherData().getJSONObject("main").getInt("pressure");
+        int pressureValue = getCurrentWeatherPoint().getPressureValue();
         pressureLabel.setText("ciśnienie: " + pressureValue + " hPa");
     }
 
     private void setPrecipitationProbability() {
-        double pop = getCurrentWeatherPoint().getWeatherData().getDouble("pop");
-        precipitationLabel.setText("opady: " + (int) (pop * 100) + "%");
+        int pop = getCurrentWeatherPoint().getPrecipitationProbabilityPercentValue();
+        precipitationLabel.setText("opady: " + pop + "%");
     }
 
     private void setDayAndHourLabel() {
-        String dayName = SHORT_DAY_NAME.format(weatherManager.getSelectedWeatherDay().getDate());
-        String hour = weatherManager.getSelectedWeatherPoint().getHour();
+        String dayName = getCurrentWeatherDay().getDayName();
+        String hour = getCurrentWeatherPoint().getHour();
         dayAndHourLabel.setText(dayName + " " + hour);
     }
 
     private void setCountryAndTownLabel() {
-        String countryCode = weatherManager.getCountryCode();
-        Locale loc = new Locale("", countryCode);
-        countryAndTownLabel.setText(loc.getDisplayCountry() + ", " + weatherManager.getCityName());
+        String countryName = weatherManager.getCountryName();
+        countryAndTownLabel.setText(countryName + ", " + weatherManager.getCityName());
     }
 
     private void setWeatherIcon() {
@@ -168,11 +166,15 @@ public class WeatherController extends BaseController implements Initializable {
         tempLabel.setText(intTempValue + "\u00B0C");
     }
 
+    private WeatherDay getCurrentWeatherDay() {
+        return weatherManager.getSelectedWeatherDay();
+    }
+
     private WeatherPoint getCurrentWeatherPoint() {
         return weatherManager.getSelectedWeatherPoint();
     }
 
-    private void displayWeather(TextField cityField, Label infoLabel, WeatherManager weatherManager, GridPane gridPane) {
+    private void downloadWeather() {
         String cityValue = cityField.getText().toLowerCase();
         changeWeatherDataVisible(false);
         infoLabel.setText("Wczytuję...");
@@ -181,42 +183,59 @@ public class WeatherController extends BaseController implements Initializable {
         if (!cityValue.equals("")) {
             weatherService.setCityName(cityValue);
             weatherService.restart();
-            weatherService.setOnSucceeded(e1 -> {
-                weatherManager.setWeatherDayList(new ArrayList<>());
-                FetchWeatherService fetchWeatherService = weatherService.getFetchWeatherService();
-                JSONObject weatherServiceResult = weatherService.getValue();
-                fetchWeatherService.setWeatherJSON(weatherServiceResult);
-                fetchWeatherService.setWeatherDayList(weatherManager.getWeatherDayList());
-                fetchWeatherService.restart();
-                fetchWeatherService.setOnSucceeded(e2 -> {
-                    FetchWeatherResult fetchWeatherResult = fetchWeatherService.getValue();
-                    switch (fetchWeatherResult) {
-                        case SUCCESS:
-                            processResult(infoLabel, weatherManager, gridPane, weatherServiceResult);
-                            break;
-                        case FAILED_BY_TOWN_NAME:
-                            infoLabel.setText("Nie znaleziono miasta!");
-                            break;
-                        case FAILED_BY_UNEXPECTED_ERROR:
-                            infoLabel.setText("Wystąpił błąd!");
-                            break;
-                    }
-                    confirmButton.setDisable(false);
-                });
-                fetchWeatherService.setOnFailed(event -> infoLabel.setText("Brak połączenia z internetem!"));
+            weatherService.setOnSucceeded(event -> {
+                DownloadWeatherResult downloadWeatherResult = weatherService.getValue();
+                switch(downloadWeatherResult) {
+                    case SUCCESS:
+                        fetchWeather();
+                        break;
+                    case FAIL:
+                        infoLabel.setText("Brak połączenia z internetem!");
+                        confirmButton.setDisable(false);
+                        break;
+                }
             });
         } else {
             infoLabel.setText("Nic nie wpisano!");
             confirmButton.setDisable(false);
         }
-
     }
 
-    private void processResult(Label infoLabel, WeatherManager weatherManager, GridPane gridPane,
-                           JSONObject weatherServiceResult) {
-        JSONObject cityData = weatherServiceResult.getJSONObject("city");
+    private void fetchWeather() {
+        weatherManager.setWeatherDayList(new ArrayList<>());
+        fetchWeatherService.setWeatherJSON(weatherService.getWeatherJSON());
+        fetchWeatherService.setWeatherDayList(weatherManager.getWeatherDayList());
+        fetchWeatherService.restart();
+        fetchWeatherService.setOnSucceeded(event -> {
+            FetchWeatherResult fetchWeatherResult = fetchWeatherService.getValue();
+            switch (fetchWeatherResult) {
+                case SUCCESS:
+                    displayWeather(weatherService.getWeatherJSON());
+                    break;
+                case FAILED_BY_TOWN_NAME:
+                    infoLabel.setText("Nie znaleziono miasta!");
+                    break;
+                case FAILED_BY_UNEXPECTED_ERROR:
+                    infoLabel.setText("Wystąpił błąd!");
+                    break;
+            }
+            confirmButton.setDisable(false);
+        });
+    }
+
+    private void displayWeather(JSONObject weatherJSON) {
+        JSONObject cityData = weatherJSON.getJSONObject("city");
         weatherManager.setCityName(cityData.getString("name"));
         weatherManager.setCountryCode(cityData.getString("country"));
+        setGridComponents();
+        selectedDayNumber = 0;
+        selectDay();
+        prepareSlider();
+        infoLabel.setVisible(false);
+        changeWeatherDataVisible(true);
+    }
+
+    private void setGridComponents() {
         int i = 0;
         for (WeatherDay weatherDay : weatherManager.getWeatherDayList()) {
             Node node = gridPane.getChildren().get(i++);
@@ -226,19 +245,18 @@ public class WeatherController extends BaseController implements Initializable {
             ((ImageView) anchorPane.getChildren().get(1)).setImage(weatherDay.getMiddlePointWeatherIcon());
             ((Label) anchorPane.getChildren().get(2)).setText(weatherDay.getAverageTemperature() + "\u00B0C");
         }
-        homeSelectedDayNumber = 0;
-        selectDay();
-        prepareSlider();
-        infoLabel.setVisible(false);
-        changeWeatherDataVisible(true);
     }
 
     private void prepareSlider() {
-        if (slider.getMajorTickUnit() != 1) {
+        if (!isSliderSetUp()) {
             setUpSlider(slider);
         } else {
             updateSlider(slider);
         }
+    }
+
+    private boolean isSliderSetUp() {
+        return slider.getMajorTickUnit() == 1;
     }
 
     private void setUpSlider(Slider slider) {
@@ -311,7 +329,7 @@ public class WeatherController extends BaseController implements Initializable {
         int i = 0;
         for (Node node : gridPane.getChildren()) {
             node.setOnMouseClicked(mouseEvent -> {
-                homeSelectedDayNumber = GridPane.getColumnIndex(node);
+                selectedDayNumber = GridPane.getColumnIndex(node);
                 selectDay();
                 updateSlider(slider);
             });
@@ -320,14 +338,14 @@ public class WeatherController extends BaseController implements Initializable {
     }
 
     private void selectDay() {
-        weatherManager.selectDay(homeSelectedDayNumber);
+        weatherManager.selectDay(selectedDayNumber);
         markSelectedDay();
         displaySelectedPoint();
     }
 
     private void markSelectedDay() {
         for (Node node : gridPane.getChildren()) {
-            if (GridPane.getColumnIndex(node) == homeSelectedDayNumber) {
+            if (GridPane.getColumnIndex(node) == selectedDayNumber) {
                 node.setStyle("-fx-background-color: #9babdd");
             } else {
                 node.setStyle("");

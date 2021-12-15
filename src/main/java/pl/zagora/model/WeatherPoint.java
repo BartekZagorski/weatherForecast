@@ -9,10 +9,6 @@ public class WeatherPoint {
     private JSONObject weatherData;
     private String hour;
 
-    public JSONObject getWeatherData() {
-        return weatherData;
-    }
-
     public void setWeatherData(JSONObject weatherData) {
         this.weatherData = weatherData;
     }
@@ -37,4 +33,21 @@ public class WeatherPoint {
         String icon = "http://openweathermap.org/img/wn/"+ iconCode +"@2x.png";
         return new Image(icon);
     }
+
+    public int getCloudyValue() {
+        return weatherData.getJSONObject("clouds").getInt("all");
+    }
+
+    public double getWindSpeed() {
+        return weatherData.getJSONObject("wind").getDouble("speed");
+    }
+
+    public int getPressureValue() {
+        return weatherData.getJSONObject("main").getInt("pressure");
+    }
+
+    public int getPrecipitationProbabilityPercentValue() {
+        return (int) (weatherData.getDouble("pop")*100);
+    }
+
 }
