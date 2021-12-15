@@ -9,10 +9,6 @@ public class WeatherPoint {
     private JSONObject weatherData;
     private String hour;
 
-    public JSONObject getWeatherData() {
-        return weatherData;
-    }
-
     public void setWeatherData(JSONObject weatherData) {
         this.weatherData = weatherData;
     }

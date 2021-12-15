@@ -98,7 +98,7 @@ public class WeatherController extends BaseController implements Initializable {
     @FXML
     void confirmButtonAction() {
         confirmButton.setDisable(true);
-        displayWeather();
+        downloadWeather();
     }
 
     @FXML
@@ -174,7 +174,7 @@ public class WeatherController extends BaseController implements Initializable {
         return weatherManager.getSelectedWeatherPoint();
     }
 
-    private void displayWeather() {
+    private void downloadWeather() {
         String cityValue = cityField.getText().toLowerCase();
         changeWeatherDataVisible(false);
         infoLabel.setText("Wczytuję...");
@@ -183,7 +183,7 @@ public class WeatherController extends BaseController implements Initializable {
         if (!cityValue.equals("")) {
             weatherService.setCityName(cityValue);
             weatherService.restart();
-            weatherService.setOnSucceeded(e1 -> {
+            weatherService.setOnSucceeded(event -> {
                 DownloadWeatherResult downloadWeatherResult = weatherService.getValue();
                 switch(downloadWeatherResult) {
                     case SUCCESS:
@@ -206,11 +206,11 @@ public class WeatherController extends BaseController implements Initializable {
         fetchWeatherService.setWeatherJSON(weatherService.getWeatherJSON());
         fetchWeatherService.setWeatherDayList(weatherManager.getWeatherDayList());
         fetchWeatherService.restart();
-        fetchWeatherService.setOnSucceeded(e2 -> {
+        fetchWeatherService.setOnSucceeded(event -> {
             FetchWeatherResult fetchWeatherResult = fetchWeatherService.getValue();
             switch (fetchWeatherResult) {
                 case SUCCESS:
-                    processResult(weatherService.getWeatherJSON());
+                    displayWeather(weatherService.getWeatherJSON());
                     break;
                 case FAILED_BY_TOWN_NAME:
                     infoLabel.setText("Nie znaleziono miasta!");
@@ -221,13 +221,21 @@ public class WeatherController extends BaseController implements Initializable {
             }
             confirmButton.setDisable(false);
         });
-        fetchWeatherService.setOnFailed(event -> infoLabel.setText("Brak połączenia z internetem!"));
     }
 
-    private void processResult(JSONObject weatherJSON) {
+    private void displayWeather(JSONObject weatherJSON) {
         JSONObject cityData = weatherJSON.getJSONObject("city");
         weatherManager.setCityName(cityData.getString("name"));
         weatherManager.setCountryCode(cityData.getString("country"));
+        setGridComponents();
+        selectedDayNumber = 0;
+        selectDay();
+        prepareSlider();
+        infoLabel.setVisible(false);
+        changeWeatherDataVisible(true);
+    }
+
+    private void setGridComponents() {
         int i = 0;
         for (WeatherDay weatherDay : weatherManager.getWeatherDayList()) {
             Node node = gridPane.getChildren().get(i++);
@@ -237,11 +245,6 @@ public class WeatherController extends BaseController implements Initializable {
             ((ImageView) anchorPane.getChildren().get(1)).setImage(weatherDay.getMiddlePointWeatherIcon());
             ((Label) anchorPane.getChildren().get(2)).setText(weatherDay.getAverageTemperature() + "\u00B0C");
         }
-        selectedDayNumber = 0;
-        selectDay();
-        prepareSlider();
-        infoLabel.setVisible(false);
-        changeWeatherDataVisible(true);
     }
 
     private void prepareSlider() {
