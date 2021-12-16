@@ -1,7 +1,5 @@
 package pl.zagora.controller.services.fetchWeatherServiceTestStubs;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class WeatherJsonStubHTTP404 extends WeatherJsonStub {

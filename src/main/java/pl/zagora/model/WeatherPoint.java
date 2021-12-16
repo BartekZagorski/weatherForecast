@@ -17,6 +17,10 @@ public class WeatherPoint {
         return hour;
     }
 
+    public JSONObject getWeatherData() {
+        return weatherData;
+    }
+
     public void setHour(String hour) {
         this.hour = hour;
     }
