@@ -1,29 +1,41 @@
 package pl.zagora;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import pl.zagora.model.WeatherDay;
 
+import java.beans.BeanProperty;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.mock;
 
+@ExtendWith(MockitoExtension.class)
 public class WeatherManagerTest {
 
-    static WeatherManager weatherManager = new WeatherManager();
-    static WeatherDay weatherDay = mock(WeatherDay.class);
+    private WeatherManager weatherManager = new WeatherManager();
 
-    @BeforeAll
-    static void initializeWeatherManager() {
-        weatherManager.setWeatherDayList(new ArrayList<>());
-        weatherManager.getWeatherDayList().add(weatherDay);
+    @Mock
+    private WeatherDay weatherDay;
+
+    @BeforeEach
+    void setUp() {
+
+        weatherManager = new WeatherManager();
+        weatherManager.setWeatherDayList(List.of(weatherDay));
+
     }
 
     @Test
     public void setSelectedWeatherDayMethodShouldSetTheIIndexElementOfWeatherDayList() {
         //given
+
 
         //when
         weatherManager.setSelectedWeatherDay(0);
