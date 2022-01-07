@@ -2,7 +2,6 @@ package pl.zagora.model;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import pl.zagora.controller.services.fetchWeatherServiceTestStubs.WeatherJsonStubHTTP200;
 
 public class WeatherDataStub extends JSONObject {
 

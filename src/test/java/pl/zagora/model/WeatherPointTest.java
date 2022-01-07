@@ -1,7 +1,7 @@
 package pl.zagora.model;
 
 import org.json.JSONObject;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.zagora.controller.services.fetchWeatherServiceTestStubs.WeatherJsonStubHTTP200;
 
@@ -11,16 +11,15 @@ import static org.hamcrest.Matchers.is;
 
 public class WeatherPointTest {
 
-    private static final WeatherPoint weatherPoint = new WeatherPoint();
-    private static JSONObject weatherData;
+    private WeatherPoint weatherPoint;
+    private JSONObject weatherData ;
 
-    @BeforeAll
-    public static void setupWeatherPoint() {
+    @BeforeEach
+    public void setupWeatherPoint() {
         WeatherJsonStubHTTP200 weatherJsonStubHTTP200 = new WeatherJsonStubHTTP200();
         JSONObject jsonObject = (JSONObject) weatherJsonStubHTTP200.getJSONArray("list").get(0);
-        WeatherDataStub weatherDataStub = new WeatherDataStub(jsonObject);
-        weatherPoint.setWeatherData(weatherDataStub);
-        weatherData = weatherPoint.getWeatherData();
+        weatherPoint = new WeatherPoint(jsonObject);
+        weatherData = jsonObject;
     }
 
     @Test
