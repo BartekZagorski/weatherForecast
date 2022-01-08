@@ -12,21 +12,20 @@ import static org.hamcrest.Matchers.is;
 public class WeatherPointTest {
 
     private WeatherPoint weatherPoint;
-    private JSONObject weatherData ;
+    private JSONObject weatherData;
 
     @BeforeEach
     public void setupWeatherPoint() {
-        WeatherJsonStubHTTP200 weatherJsonStubHTTP200 = new WeatherJsonStubHTTP200();
-        JSONObject jsonObject = (JSONObject) weatherJsonStubHTTP200.getJSONArray("list").get(0);
-        weatherPoint = new WeatherPoint(jsonObject);
-        weatherData = jsonObject;
+        weatherData = (JSONObject) new WeatherJsonStubHTTP200().getJSONArray("list").get(0);
     }
 
     @Test
     public void getTempValueMethodIsSupposedToReturnAppropriateValue() {
         //given
-        //when
         int tempValueFromWeatherData = (int) Math.round(weatherData.getJSONObject("main").getDouble("temp"));
+
+        //when
+        weatherPoint = new WeatherPoint(weatherData);
 
         //then
         assertThat(weatherPoint.getTempValue(), equalTo(tempValueFromWeatherData));
@@ -36,8 +35,10 @@ public class WeatherPointTest {
     @Test
     public void getCloudyValueMethodShouldReturnAppropriateValue() {
         //given
-        //when
         int cloudyValueFromWeatherData = weatherData.getJSONObject("clouds").getInt("all");
+
+        //when
+        weatherPoint = new WeatherPoint(weatherData);
 
         //then
         assertThat(weatherPoint.getCloudyValue(), is(cloudyValueFromWeatherData));
@@ -46,8 +47,10 @@ public class WeatherPointTest {
     @Test
     public void getWindSpeedMethodIsOughtToReturnRelevantValue() {
         //given
-        //when
         double windSpeedValueFromWeatherData = weatherData.getJSONObject("wind").getDouble("speed");
+
+        //when
+        weatherPoint = new WeatherPoint(weatherData);
 
         //then
         assertThat(weatherPoint.getWindSpeed(), is(windSpeedValueFromWeatherData));
@@ -56,8 +59,10 @@ public class WeatherPointTest {
     @Test
     public void getPressureValueMethodShouldReturnRelevantValue() {
         //given
-        //when
         int pressureValueFromWeatherData = weatherData.getJSONObject("main").getInt("pressure");
+
+        //when
+        weatherPoint = new WeatherPoint(weatherData);
 
         //then
         assertThat(weatherPoint.getPressureValue(), equalTo(pressureValueFromWeatherData));
@@ -66,8 +71,10 @@ public class WeatherPointTest {
     @Test
     public void getPrecipitationProbabilityPercentValueMethodIsMeantToReturnAppropriateValue() {
         //given
-        //when
         int precipitationProbabilityPercentValueFromWeatherData = (int) (weatherData.getDouble("pop")*100);
+
+        //when
+        weatherPoint = new WeatherPoint(weatherData);
 
         //then
         assertThat(weatherPoint.getPrecipitationProbabilityPercentValue(),
