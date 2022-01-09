@@ -3,7 +3,7 @@ package pl.zagora.model;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.zagora.controller.services.fetchWeatherServiceTestStubs.WeatherJsonStubHTTP200;
+import pl.zagora.controller.services.fetchWeatherServiceTestStubs.WeatherJsonStub;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -16,7 +16,8 @@ public class WeatherPointTest {
 
     @BeforeEach
     public void setupWeatherPoint() {
-        weatherData = (JSONObject) new WeatherJsonStubHTTP200().getJSONArray("list").get(0);
+        JSONObject jsonObject = new WeatherJsonStub("jsonDataWithHttpResponse200.json").getJsonObject();
+        weatherData = (JSONObject) jsonObject.getJSONArray("list").get(0);
     }
 
     @Test
