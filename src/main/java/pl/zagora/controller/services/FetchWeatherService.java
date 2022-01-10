@@ -17,11 +17,7 @@ import java.util.List;
 public class FetchWeatherService extends Service<FetchWeatherResult> {
 
     private JSONObject weatherJSON;
-    private List<WeatherDay> weatherDayList;
-
-    public JSONObject getWeatherJSON() {
-        return weatherJSON;
-    }
+    private List<WeatherDay> weatherDayList = new ArrayList<>();
 
     public void setWeatherJSON(JSONObject weatherJSON) {
         this.weatherJSON = weatherJSON;

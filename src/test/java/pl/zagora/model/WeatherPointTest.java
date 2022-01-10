@@ -15,7 +15,7 @@ public class WeatherPointTest {
     private JSONObject weatherData;
 
     @BeforeEach
-    public void setupWeatherPoint() {
+    public void setupWeatherData() {
         JSONObject jsonObject = new WeatherJsonStub("jsonDataWithHttpResponse200.json").getJsonObject();
         weatherData = (JSONObject) jsonObject.getJSONArray("list").get(0);
     }

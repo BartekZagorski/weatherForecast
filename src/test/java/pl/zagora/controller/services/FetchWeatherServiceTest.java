@@ -1,7 +1,6 @@
 package pl.zagora.controller.services;
 
 import org.json.JSONObject;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.zagora.controller.FetchWeatherResult;
@@ -64,28 +63,28 @@ public class FetchWeatherServiceTest {
         assertThat(fetchWeatherService.getWeatherDayList().size(), equalTo(6));
     }
 
-//    @Test
-//    public void weatherDayListShouldHaveFiveDaysAfterFetchWeatherCallIfTheDataStartsFromMidnightUTC() {
-//        //given
-//        WeatherJsonStubHTTP200 wjs200 = new WeatherJsonStubHTTP200();
-//        wjs200.manipulateDataToStartFromMidnightUTC();
-//        fetchWeatherService.setWeatherJSON(wjs200);
-//        //when
-//        fetchWeatherService.fetchWeather();
-//        //then
-//        assertThat(fetchWeatherService.getWeatherDayList().size(), equalTo(5));
-//    }
+    @Test
+    public void weatherDayListShouldHaveFiveDaysAfterFetchWeatherCallIfTheDataStartsFromMidnightUTC() {
+        //given
+        WeatherJsonStub wjs = new WeatherJsonStub("jsonDataWithHttpResponse200ThatBeginsAtMidnightUTC.json");
+        fetchWeatherService.setWeatherJSON(wjs.getJsonObject());
+        //when
+        fetchWeatherService.fetchWeather();
+        //then
+        assertThat(fetchWeatherService.getWeatherDayList().size(), equalTo(5));
+    }
 
     @Test
     public void weatherPointFromWeatherDayListShouldHaveSameHourThanRelevantWeatherPointFromWeatherJSON() {
         //given
-        fetchWeatherService.setWeatherJSON((new WeatherJsonStub("jsonDataWithHttpResponse200.json").getJsonObject()));
+        JSONObject jsonObject = new WeatherJsonStub("jsonDataWithHttpResponse200.json").getJsonObject();
+        fetchWeatherService.setWeatherJSON(jsonObject);
         fetchWeatherService.fetchWeather();
 
         //when
 
         String hourFromList = fetchWeatherService.getWeatherDayList().get(0).getWeatherPoints().get(0).getHour();
-        JSONObject object = (JSONObject) fetchWeatherService.getWeatherJSON().getJSONArray("list").get(0);
+        JSONObject object = (JSONObject) jsonObject.getJSONArray("list").get(0);
         ZonedDateTime dateFromJSON =
                 ZonedDateTime.ofInstant(Instant.ofEpochSecond(object.getLong("dt")), ZoneId.systemDefault());
 
@@ -93,11 +92,6 @@ public class FetchWeatherServiceTest {
 
         assertThat(hourFromList, equalTo(dateFromJSON.getHour() + ":00"));
 
-    }
-
-    @AfterEach
-    public void cleanUpAfterEachTest() {
-        fetchWeatherService = new FetchWeatherService();
     }
 
 }

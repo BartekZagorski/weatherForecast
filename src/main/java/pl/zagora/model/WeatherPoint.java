@@ -10,8 +10,6 @@ import java.time.ZonedDateTime;
 
 public class WeatherPoint {
 
-    private JSONObject weatherData;
-
     private String hour;
     private int tempValue;
     private String weatherIcon;
@@ -20,11 +18,7 @@ public class WeatherPoint {
     private int pressureValue;
     private int precipitationProbabilityPercentValue;
 
-    public WeatherPoint (JSONObject jsonObject) {
-        fetchProperties(jsonObject);
-    }
-
-    public void setPropertiesUsingJSON(JSONObject jsonObject) {
+    public WeatherPoint(JSONObject jsonObject) {
         fetchProperties(jsonObject);
     }
 
@@ -38,16 +32,8 @@ public class WeatherPoint {
         fetchPrecipitationProbabilityPercentValue(jsonObject);
     }
 
-    public void setWeatherData(JSONObject weatherData) {
-        this.weatherData = weatherData;
-    }
-
     public String getHour() {
         return hour;
-    }
-
-    public JSONObject getWeatherData() {
-        return weatherData;
     }
 
     private void fetchHour(JSONObject jsonObject) {
@@ -69,7 +55,7 @@ public class WeatherPoint {
     private void fetchWeatherIcon(JSONObject jsonObject) {
         JSONArray weather = jsonObject.getJSONArray("weather");
         String iconCode = weather.getJSONObject(0).getString("icon");
-        this.weatherIcon = "http://openweathermap.org/img/wn/"+ iconCode +"@2x.png";
+        this.weatherIcon = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
     }
 
     public Image getWeatherIcon() {
@@ -101,7 +87,7 @@ public class WeatherPoint {
     }
 
     private void fetchPrecipitationProbabilityPercentValue(JSONObject jsonObject) {
-        this.precipitationProbabilityPercentValue = (int) (jsonObject.getDouble("pop")*100);
+        this.precipitationProbabilityPercentValue = (int) (jsonObject.getDouble("pop") * 100);
     }
 
     public int getPrecipitationProbabilityPercentValue() {

@@ -2,42 +2,54 @@ package pl.zagora;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import pl.zagora.model.WeatherDay;
-
-import java.util.List;
+import pl.zagora.model.WeatherPoint;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
-@ExtendWith(MockitoExtension.class)
 public class WeatherManagerTest {
 
     private WeatherManager weatherManager = new WeatherManager();
-
-    @Mock
-    private WeatherDay weatherDay;
 
     @BeforeEach
     void setUp() {
 
         weatherManager = new WeatherManager();
-        weatherManager.setWeatherDayList(List.of(weatherDay));
 
     }
 
     @Test
-    public void setSelectedWeatherDayMethodShouldSetTheIIndexElementOfWeatherDayList() {
+    public void selectDayMethodShouldAssignIthDayToSelectedDayAndFirstPointOfWeatherPointListToSelectedPoint() {
         //given
-
+        WeatherDay sampleWeatherDay = mock(WeatherDay.class);
+        WeatherDay thisWeatherDay = mock(WeatherDay.class);
+        weatherManager.getWeatherDayList().add(sampleWeatherDay);
+        weatherManager.getWeatherDayList().add(thisWeatherDay);
+        WeatherPoint weatherPoint = mock(WeatherPoint.class);
+        given(thisWeatherDay.getWeatherPoint(0)).willReturn(weatherPoint);
 
         //when
-        weatherManager.setSelectedWeatherDay(0);
+        weatherManager.selectDay(1);
 
         //then
-        assertThat(weatherManager.getSelectedWeatherDay(), is(weatherDay));
+        assertThat(weatherManager.getSelectedWeatherDay(), is(thisWeatherDay));
+        assertThat(weatherManager.getSelectedWeatherPoint(), is(thisWeatherDay.getWeatherPoint(0)));
+
+    }
+
+    @Test
+    void getCityName() {
+        //given
+        String countryCode = "fr";
+
+        //when
+        weatherManager.setCountryCode(countryCode);
+
+        //then
+        assertThat(weatherManager.getCountryName(), is("Francja"));
 
     }
 }
