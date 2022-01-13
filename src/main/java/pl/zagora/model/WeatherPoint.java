@@ -58,8 +58,8 @@ public class WeatherPoint {
         this.weatherIcon = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
     }
 
-    public Image getWeatherIcon() {
-        return new Image(weatherIcon);
+    public String getWeatherIcon() {
+        return weatherIcon;
     }
 
     private void fetchCloudyValue(JSONObject jsonObject) {

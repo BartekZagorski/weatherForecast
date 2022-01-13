@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pl.zagora.controller.BaseController;
 import pl.zagora.controller.MainController;
+import pl.zagora.controller.OkHttpAPIClient;
 import pl.zagora.controller.services.WeatherService;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class ViewFactory {
 
     public void showMainWindow() {
 
-        BaseController mainWindowController = new MainController(new WeatherService(), this,
+        BaseController mainWindowController = new MainController(new WeatherService(new OkHttpAPIClient()), this,
                 "MainWindowGood.fxml");
 
         Parent parent = createView(mainWindowController);
