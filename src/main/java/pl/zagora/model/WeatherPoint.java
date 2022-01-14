@@ -1,6 +1,5 @@
 package pl.zagora.model;
 
-import javafx.scene.image.Image;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -12,7 +11,7 @@ public class WeatherPoint {
 
     private String hour;
     private int tempValue;
-    private String weatherIcon;
+    private String weatherIconUrl;
     private int cloudyValue;
     private double windSpeed;
     private int pressureValue;
@@ -55,11 +54,11 @@ public class WeatherPoint {
     private void fetchWeatherIcon(JSONObject jsonObject) {
         JSONArray weather = jsonObject.getJSONArray("weather");
         String iconCode = weather.getJSONObject(0).getString("icon");
-        this.weatherIcon = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
+        this.weatherIconUrl = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
     }
 
-    public String getWeatherIcon() {
-        return weatherIcon;
+    public String getWeatherIconUrl() {
+        return weatherIconUrl;
     }
 
     private void fetchCloudyValue(JSONObject jsonObject) {

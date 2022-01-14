@@ -157,7 +157,7 @@ public class WeatherController extends BaseController implements Initializable {
     }
 
     private void setWeatherIcon() {
-        Image image = new Image(getCurrentWeatherPoint().getWeatherIcon());
+        Image image = new Image(getCurrentWeatherPoint().getWeatherIconUrl());
         imageView.setImage(image);
     }
 
