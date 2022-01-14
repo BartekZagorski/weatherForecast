@@ -2,22 +2,22 @@ package pl.zagora.controller.services;
 
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import org.json.JSONObject;
-import pl.zagora.Config;
 import pl.zagora.controller.DownloadWeatherResult;
+import pl.zagora.controller.WeatherAPIClient;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class WeatherService extends Service<DownloadWeatherResult> {
 
-    private final OkHttpClient client = new OkHttpClient();
+    private final WeatherAPIClient weatherAPIClient;
     private String cityName;
-    private static final String UNIT = "metric";
     private JSONObject weatherJSON;
+
+    public WeatherService(WeatherAPIClient weatherAPIClient) {
+        this.weatherAPIClient = weatherAPIClient;
+    }
 
     public JSONObject getWeatherJSON() {
         return weatherJSON;
@@ -28,13 +28,9 @@ public class WeatherService extends Service<DownloadWeatherResult> {
     }
 
     public DownloadWeatherResult getWeather() {
-        String url =
-                "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=" + UNIT + "&appid=" + Config.API_KEY;
-        Request request = new Request.Builder()
-                .url(url).build();
         try {
-            Response response = client.newCall(request).execute();
-            weatherJSON = new JSONObject(Objects.requireNonNull(response.body()).string());
+            String response = weatherAPIClient.call(cityName);
+            weatherJSON = new JSONObject(Objects.requireNonNull(response));
             return DownloadWeatherResult.SUCCESS;
         } catch (IOException e) {
             return DownloadWeatherResult.FAIL;

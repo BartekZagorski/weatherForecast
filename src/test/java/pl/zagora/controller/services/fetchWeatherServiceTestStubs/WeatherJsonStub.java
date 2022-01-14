@@ -1,25 +1,26 @@
 package pl.zagora.controller.services.fetchWeatherServiceTestStubs;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-public class WeatherJsonStub extends JSONObject{
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class WeatherJsonStub{
 
     protected JSONObject jsonObject;
 
-    public WeatherJsonStub() {
-        this.jsonObject = new JSONObject();
+    public JSONObject getJsonObject() {
+        return jsonObject;
     }
-
-
-    @Override
-    public JSONArray getJSONArray(String key) throws JSONException {
-        return this.jsonObject.getJSONArray(key);
-    }
-
-    @Override
-    public int getInt(String key) throws JSONException {
-        return this.jsonObject.getInt(key);
+    public WeatherJsonStub (String filename) {
+        String path = "src/test/resources/" + filename;
+        String data;
+        try {
+            data = new String(Files.readAllBytes(Paths.get(path)));
+        } catch (IOException e) {
+            data = "";
+        }
+        jsonObject = new JSONObject(data);
     }
 }

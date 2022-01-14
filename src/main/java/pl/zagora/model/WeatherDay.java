@@ -41,7 +41,7 @@ public class WeatherDay {
     }
 
     public Image getMiddlePointWeatherIcon() {
-        return weatherPoints.get(getWeatherPointsCount() / 2).getWeatherIcon();
+        return new Image(weatherPoints.get(getWeatherPointsCount() / 2).getWeatherIconUrl());
     }
 
     public String getDayName() {

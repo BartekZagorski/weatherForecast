@@ -3,25 +3,26 @@ package pl.zagora;
 import pl.zagora.model.WeatherDay;
 import pl.zagora.model.WeatherPoint;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class WeatherManager {
 
-    private List<WeatherDay> weatherDayList;
+    private List<WeatherDay> weatherDayList = new ArrayList<>();
     private WeatherDay selectedWeatherDay;
     private WeatherPoint selectedWeatherPoint;
     private String cityName;
     private String countryCode;
 
-    public void setSelectedWeatherDay (int i) {
+    private void setSelectedWeatherDay (int i) {
         selectedWeatherDay = weatherDayList.get(i);
     }
     public void setSelectedWeatherPoint(WeatherPoint selectedWeatherPoint) {
         this.selectedWeatherPoint = selectedWeatherPoint;
     }
 
-    public void setSelectedWeatherPoint (int i) {
+    private void setSelectedWeatherPoint (int i) {
         selectedWeatherPoint = selectedWeatherDay.getWeatherPoint(i);
     }
 

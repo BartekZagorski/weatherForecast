@@ -17,11 +17,7 @@ import java.util.List;
 public class FetchWeatherService extends Service<FetchWeatherResult> {
 
     private JSONObject weatherJSON;
-    private List<WeatherDay> weatherDayList;
-
-    public JSONObject getWeatherJSON() {
-        return weatherJSON;
-    }
+    private List<WeatherDay> weatherDayList = new ArrayList<>();
 
     public void setWeatherJSON(JSONObject weatherJSON) {
         this.weatherJSON = weatherJSON;
@@ -68,9 +64,7 @@ public class FetchWeatherService extends Service<FetchWeatherResult> {
     }
 
     private void addNewWeatherPointToTheList(List<WeatherPoint> list, JSONObject object) {
-        WeatherPoint weatherPoint = new WeatherPoint();
-        weatherPoint.setWeatherData(object);
-        weatherPoint.setHour(getSimpleHour(object));
+        WeatherPoint weatherPoint = new WeatherPoint(object);
         list.add(weatherPoint);
     }
 
@@ -84,12 +78,6 @@ public class FetchWeatherService extends Service<FetchWeatherResult> {
 
     private boolean httpStatus(int i) {
         return weatherJSON.getInt("cod") == i;
-    }
-
-    private String getSimpleHour(JSONObject jsonObject) {
-        int seconds = jsonObject.getInt("dt");
-        ZonedDateTime zdt = ZonedDateTime.ofInstant(Instant.ofEpochSecond(seconds), ZoneId.systemDefault());
-        return zdt.getHour() + ":00";
     }
 
     @Override

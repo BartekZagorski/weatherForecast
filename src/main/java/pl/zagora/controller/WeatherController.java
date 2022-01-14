@@ -157,7 +157,7 @@ public class WeatherController extends BaseController implements Initializable {
     }
 
     private void setWeatherIcon() {
-        Image image = getCurrentWeatherPoint().getWeatherIcon();
+        Image image = new Image(getCurrentWeatherPoint().getWeatherIconUrl());
         imageView.setImage(image);
     }
 
@@ -185,14 +185,12 @@ public class WeatherController extends BaseController implements Initializable {
             weatherService.restart();
             weatherService.setOnSucceeded(event -> {
                 DownloadWeatherResult downloadWeatherResult = weatherService.getValue();
-                switch(downloadWeatherResult) {
-                    case SUCCESS:
-                        fetchWeather();
-                        break;
-                    case FAIL:
+                switch (downloadWeatherResult) {
+                    case SUCCESS -> fetchWeather();
+                    case FAIL -> {
                         infoLabel.setText("Brak połączenia z internetem!");
                         confirmButton.setDisable(false);
-                        break;
+                    }
                 }
             });
         } else {
@@ -209,15 +207,9 @@ public class WeatherController extends BaseController implements Initializable {
         fetchWeatherService.setOnSucceeded(event -> {
             FetchWeatherResult fetchWeatherResult = fetchWeatherService.getValue();
             switch (fetchWeatherResult) {
-                case SUCCESS:
-                    displayWeather(weatherService.getWeatherJSON());
-                    break;
-                case FAILED_BY_TOWN_NAME:
-                    infoLabel.setText("Nie znaleziono miasta!");
-                    break;
-                case FAILED_BY_UNEXPECTED_ERROR:
-                    infoLabel.setText("Wystąpił błąd!");
-                    break;
+                case SUCCESS -> displayWeather(weatherService.getWeatherJSON());
+                case FAILED_BY_TOWN_NAME -> infoLabel.setText("Nie znaleziono miasta!");
+                case FAILED_BY_UNEXPECTED_ERROR -> infoLabel.setText("Wystąpił błąd!");
             }
             confirmButton.setDisable(false);
         });
@@ -330,8 +322,10 @@ public class WeatherController extends BaseController implements Initializable {
         for (Node node : gridPane.getChildren()) {
             node.setOnMouseClicked(mouseEvent -> {
                 selectedDayNumber = GridPane.getColumnIndex(node);
-                selectDay();
-                updateSlider(slider);
+                if ( selectedDayNumber < weatherManager.getWeatherDayList().size() ) {
+                    selectDay();
+                    updateSlider(slider);
+                }
             });
             GridPane.setColumnIndex(node, i++);
         }
